@@ -1,0 +1,28 @@
+#ls
+alias ls="ls --color=auto"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+export EDITOR="/usr/bin/nvim"
+
+# trash bin
+alias trash='mkdir -p "$HOME/.trash" && mv -b -t "$HOME/.trash"'
+alias cleartrash='rm -fv "$HOME/.trash/*"'
+
+# weather forecast
+alias forecast="curl -s wttr.in | head -n -1"
+
+# improved reset and clear
+alias reset="tput reset"
+alias clear="tput reset"
+
+# get ip alias
+alias getip="curl -s https://ipecho.net/plain | xargs echo"
+
+# better du
+alias du="du -h"
+
+# vim -> nvim alias
+alias vim="nvim"
