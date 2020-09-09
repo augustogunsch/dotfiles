@@ -17,3 +17,5 @@ installto() {
 
 install tmux.conf
 install zshrc
+install xinitrc
+install wallpaper.png
