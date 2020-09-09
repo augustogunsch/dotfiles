@@ -1,3 +1,3 @@
-feh --bg-tile ~/.wallpaper.png
+feh --bg-fill ~/.wallpaper.png
 dwmstatus &
 exec dwm
