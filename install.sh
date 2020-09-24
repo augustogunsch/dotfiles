@@ -8,14 +8,16 @@ if [ ! "$mydir" = "$HOME/dotfiles" ]; then
 fi
 
 install() {
-	ln "$mydir/$1" "$HOME/.$1" -f
+	ln "$mydir/$1" "$HOME/.$1" -sf
 }
 
 installto() {
-	ln "$mydir/$1" "$2" -f
+	mkdir -p "$HOME/$2"
+	ln "$mydir/$1" "$HOME/$2/$1" -sf
 }
 
 install tmux.conf
 install zshrc
 install xinitrc
 install wallpaper.png
+installto picom.conf .config/picom
