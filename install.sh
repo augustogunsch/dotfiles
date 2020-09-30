@@ -21,3 +21,4 @@ install zshrc
 install xinitrc
 install wallpaper.png
 installto picom.conf .config/picom
+installto dunstrc .config
