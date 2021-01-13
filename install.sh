@@ -22,3 +22,4 @@ install xinitrc
 install wallpaper.png
 installto picom.conf .config/picom
 installto dunstrc .config
+installto config.py .config/qutebrowser

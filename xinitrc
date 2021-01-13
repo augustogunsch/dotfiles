@@ -1,5 +1,6 @@
 xset s off -dpms
 
+unclutter &
 picom &
 dunst &
 feh --bg-fill ~/.wallpaper.png
