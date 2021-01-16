@@ -171,7 +171,7 @@ c.tabs.show = 'always'
 # the search engine name to the search term, e.g. `:open google
 # qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}', 'yt': 'https://yewtu.be/search?q={}', 'lb': 'https://lbry.tv/$/search?q={}', 'wp': 'https://en.wikipedia.org/w/index.php?search={}' }
+c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}', 'yt': 'https://yewtu.be/search?q={}', 'lb': 'https://lbry.tv/$/search?q={}', 'wp': 'https://en.wikipedia.org/w/index.php?search={}', 'bc': 'https://www.bitchute.com/search/?query={}' }
 
 # Background color for hints. Note that you can use a `rgba(...)` value
 # for transparency.
