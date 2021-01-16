@@ -127,6 +127,9 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #   - ask
 config.set('content.notifications', False, 'https://www.reddit.com')
 
+# Editor
+config.set('editor.command', [ 'st', '-e', 'vim', '{file}' ]);
+
 # When/how to show the scrollbar.
 # Type: String
 # Valid values:
@@ -209,3 +212,4 @@ config.bind('M', 'hint links spawn mpv {hint-url}')
 config.bind('xb', 'config-cycle statusbar.show always never')
 config.bind('xt', 'config-cycle tabs.show always never')
 config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
+config.bind('e', 'edit-url')
