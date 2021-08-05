@@ -11,7 +11,7 @@
 #   qute://help/settings.html
 
 # Uncomment this to still load settings configured via autoconfig.yml
-# config.load_autoconfig()
+config.load_autoconfig(False)
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
@@ -119,14 +119,6 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
-# Allow websites to show notifications.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set('content.notifications', False, 'https://www.reddit.com')
-
 # Editor
 config.set('editor.command', [ 'st', '-e', 'vim', '{file}' ]);
 
@@ -174,7 +166,7 @@ c.tabs.show = 'always'
 # the search engine name to the search term, e.g. `:open google
 # qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}', 'yt': 'https://yewtu.be/search?q={}', 'lb': 'https://lbry.tv/$/search?q={}', 'wp': 'https://en.wikipedia.org/w/index.php?search={}', 'bc': 'https://www.bitchute.com/search/?query={}' }
+c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}', 'yt': 'https://yewtu.be/search?q={}', 'lb': 'https://lbry.tv/$/search?q={}', 'wp': 'https://en.wikipedia.org/w/index.php?search={}', 'bc': 'https://www.bitchute.com/search/?query={}', 'wiby': 'https://wiby.me/?q={}' }
 
 # Background color for hints. Note that you can use a `rgba(...)` value
 # for transparency.
@@ -213,3 +205,4 @@ config.bind('xb', 'config-cycle statusbar.show always never')
 config.bind('xt', 'config-cycle tabs.show always never')
 config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 config.bind('e', 'edit-url')
+config.bind(',', 'download-open;; download-clear')

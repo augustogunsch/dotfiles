@@ -1,4 +1,5 @@
 xset s off -dpms
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
 unclutter &
 picom &

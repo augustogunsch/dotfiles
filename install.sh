@@ -19,7 +19,8 @@ installto() {
 install tmux.conf
 install zshrc
 install xinitrc
+install Xmodmap
 install wallpaper.png
 installto picom.conf .config/picom
-installto dunstrc .config
+installto dunstrc .config/dunst
 installto config.py .config/qutebrowser

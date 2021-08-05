@@ -25,6 +25,7 @@ alias getip="curl -s https://ipecho.net/plain | xargs echo"
 
 # better du
 alias du="du -h"
+
 alias weather="curl -s wttr.in | head -n-1"
 
 alias feh="feh -."
