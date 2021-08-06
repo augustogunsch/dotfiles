@@ -21,6 +21,7 @@ install zshrc
 install xinitrc
 install Xmodmap
 install wallpaper.png
+install vimrc
 installto picom.conf .config/picom
 installto dunstrc .config/dunst
 installto config.py .config/qutebrowser
