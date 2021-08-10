@@ -46,57 +46,14 @@ augroup python
 	autocmd FileType python set ts=4
 augroup END
 
-" status line
-set laststatus=2
-set statusline=
-set statusline+=%1*
-set statusline+=\ 
-set statusline+=%{StatuslineMode()}
-set statusline+=\ 
-set statusline+=%2*
-set statusline+=%=
-set statusline+=%1*
-set statusline+=\ 
-set statusline+=%3l
-set statusline+=:
-set statusline+=%c
-set statusline+=/
-set statusline+=%L
-set statusline+=\ 
-hi User1 ctermbg=27 ctermfg=white
-hi User2 ctermbg=234 ctermfg=white
+call plug#begin()
 
-function! StatuslineMode()
-  let l:mode=mode()
-  if l:mode==#"n"
-    hi User1 ctermbg=27 ctermfg=white
-    return "NORMAL"
-  elseif l:mode==?"v"
-    hi User1 ctermbg=yellow ctermfg=black
-    return "VISUAL"
-  elseif l:mode==#"i"
-    hi User1 ctermbg=darkgreen ctermfg=black
-    return "INSERT"
-  elseif l:mode==#"R"
-    hi User1 ctermbg=darkred ctermfg=white
-    return "REPLACE"
-  endif
-endfunction
+Plug 'valloric/youcompleteme'
 
-" TabLine colors
-hi clear TabLine
-hi clear TabLineFill
-hi clear TabLineSel
-hi TabLineFill ctermfg=white  ctermbg=234
-hi TabLine ctermfg=white  ctermbg=237 
-hi TabLineSel ctermfg=white  ctermbg=27
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes
 
-" Disable -- INSERT --, etc
-set noshowmode
-set noshowcmd
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 
-" Omni completion
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-" Ctags
-nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+ias --extras=+q .<CR>
+call plug#end()
