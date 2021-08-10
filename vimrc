@@ -48,12 +48,18 @@ augroup END
 
 call plug#begin()
 
-Plug 'valloric/youcompleteme'
+Plug 'valloric/youcompleteme', { 'do': './install.py --clangd-completer'}
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
+
+let g:airline_theme = "powerlineish"
+let g:airline#extensions#tabline#enabled = 1
+
+:let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <C-F12> :!compiledb make<cr>
