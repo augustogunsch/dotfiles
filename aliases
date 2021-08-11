@@ -9,23 +9,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 export EDITOR="/usr/bin/vim"
 
-# trash bin
-alias trash='mkdir -p "$HOME/.trash" && mv -b -t "$HOME/.trash"'
-alias cleartrash='rm -fv "$HOME/.trash/*"'
-
-# weather forecast
-alias forecast="curl -s wttr.in | head -n -1"
-
 # improved reset and clear
 alias reset="tput reset"
 alias clear="tput reset"
 
-# get ip alias
-alias getip="curl -s https://ipecho.net/plain | xargs echo"
-
 # better du
 alias du="du -h"
-
-alias weather="curl -s wttr.in | head -n-1"
 
 alias feh="feh -."

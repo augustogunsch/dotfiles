@@ -1,27 +1,25 @@
 #!/bin/sh
-mydir=$(dirname "$0")
-mydir=$(realpath "$mydir")
+cd "$(dirname "$0")"
+PWD="$(pwd)"
 
-if [ ! "$mydir" = "$HOME/dotfiles" ]; then
-	mv "$mydir" "$HOME/dotfiles"
-	mydir="$HOME/dotfiles"
-fi
+#dotfiles from
+#~/.config
+for f in config/*; do
+	mkdir -p "$HOME/.$f"
+	for d in $f/*; do
+		ln -sf "$PWD/$d" "$HOME/.$d"
+	done
+done
 
-install() {
-	ln "$mydir/$1" "$HOME/.$1" -sf
-}
+#dotfiles from
+#~
+for f in home/*; do
+	ln -sf "$PWD/$f" "$HOME/.$(basename $f)"
+done
 
-installto() {
-	mkdir -p "$HOME/$2"
-	ln "$mydir/$1" "$HOME/$2/$1" -sf
-}
-
-install tmux.conf
-install zshrc
-install xinitrc
-install Xmodmap
-install wallpaper.png
-install vimrc
-installto picom.conf .config/picom
-installto dunstrc .config/dunst
-installto config.py .config/qutebrowser
+#scripts
+#~/.local/bin
+mkdir -p "$HOME/.local/bin"
+for f in local/bin/*; do
+	ln -sf "$PWD/$f" "$HOME/.$f"
+done
