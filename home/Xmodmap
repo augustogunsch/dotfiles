@@ -1,6 +1,2 @@
-! Use win key as compose
-keycode 133 = Multi_key Multi_key
-
-! Turn caps lock into escape
-clear lock
-keycode 66 = Escape Caps_Lock
+remove control = Control_R
+keysym Control_R = dead_greek

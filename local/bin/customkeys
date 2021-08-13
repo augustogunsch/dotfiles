@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Compose key: windows key
+setxkbmap -option compose:lwin
+
+# Caps turned into escape
+setxkbmap -option caps:escape_shifted_capslock
+
+# dead_greek as control right
+xmodmap ~/.Xmodmap
