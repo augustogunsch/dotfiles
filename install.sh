@@ -12,7 +12,7 @@ clone_dir() {
 		if [ -d "$f" ]; then
 			clone_dir "$f" "$to"
 		elif [ -f "$f" ]; then
-			ln -sf '$PWD/$f' '$to/.${f#home/}'
+			ln -sf "$PWD/$f" "$to/.${f#home/}"
 		fi
 	done
 }
