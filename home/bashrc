@@ -1,0 +1,19 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+
+export PS1='\e[1m\e[38;5;63m[\e[38;5;68m\u@\H \e[38;5;15m\w\e[38;5;63m]$\e[m '
+
+# aliases:
+source ~/dotfiles/aliases
+
+# reload with .
+alias .="source ~/.bashrc"
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+	exec startx
+fi
