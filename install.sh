@@ -3,7 +3,6 @@ set -e
 cd "$(dirname "$0")"
 PWD="$(pwd)"
 
-#dir to
 clone_dir() {
 	local dir=${1:-home}
 	local to=${2:-$HOME}
@@ -13,7 +12,7 @@ clone_dir() {
 		if [ -d "$f" ]; then
 			clone_dir "$f" "$to"
 		elif [ -f "$f" ]; then
-			ln -sf '$PWD/$f' -> '$to/.${f#home/}'
+			ln -sf '$PWD/$f' '$to/.${f#home/}'
 		fi
 	done
 }
