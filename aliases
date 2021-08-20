@@ -16,4 +16,8 @@ alias clear="tput reset"
 # better du
 alias du="du -h"
 
+#better feh
 alias feh="feh -."
+
+#vi keybindings
+alias info="info --vi-keys"
