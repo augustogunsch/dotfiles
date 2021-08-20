@@ -1,25 +1,23 @@
 #!/bin/sh
+set -e
 cd "$(dirname "$0")"
 PWD="$(pwd)"
 
-#dotfiles from
-#~/.config
-for f in config/*; do
-	mkdir -p "$HOME/.$f"
-	for d in $f/*; do
-		ln -sf "$PWD/$d" "$HOME/.$d"
+#dir to
+clone_dir() {
+	local dir=${1:-home}
+	local to=${2:-$HOME}
+
+	mkdir -p "$to/.${dir#home}"
+	for f in $dir/*; do
+		if [ -d "$f" ]; then
+			clone_dir "$f" "$to"
+		elif [ -f "$f" ]; then
+			ln -sf '$PWD/$f' -> '$to/.${f#home/}'
+		fi
 	done
-done
+}
 
-#dotfiles from
-#~
-for f in home/*; do
-	ln -sf "$PWD/$f" "$HOME/.$(basename $f)"
-done
-
-#scripts
-#~/.local/bin
-mkdir -p "$HOME/.local/bin"
-for f in local/bin/*; do
-	ln -sf "$PWD/$f" "$HOME/.$f"
+for d in */; do
+	clone_dir "${d%/}"
 done
