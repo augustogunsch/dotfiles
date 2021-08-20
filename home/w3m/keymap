@@ -1,0 +1,34 @@
+# A sample of ~/.w3m/keymap (default)
+#
+# Ctrl  : C-, ^
+# Escape: ESC-, M-, ^[
+# Space : SPC, ' '
+# Tab   : TAB, ^i, ^I
+# Delete: DEL, ^?
+# Up    : UP, ^[[A
+# Down  : DOWN, ^[[B
+# Right : RIGHT, ^[[C
+# Left  : LEFT, ^[[D
+
+# Unmappings
+keymap	g	NULL
+keymap	W	NULL
+keymap	C-q	NULL
+keymap	{	NULL
+keymap	}	NULL
+keymap	U	NULL
+
+
+# Vi-like bindings
+keymap	b	PREV_WORD
+keymap	C-d	NEXT_PAGE
+keymap	C-u	PREV_PAGE
+keymap	gg	BEGIN
+
+# Qutebrowser-like bindings
+keymap	dd	CLOSE_TAB
+keymap	o	GOTO
+keymap	C-o	OPTIONS
+keymap	K	PREV_TAB
+keymap	J	NEXT_TAB
+keymap	O	TAB_GOTO
