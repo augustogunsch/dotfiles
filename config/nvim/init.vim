@@ -60,22 +60,25 @@ Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :silent NERDTreeToggle<CR>
 
-augroup nerdtree
-	autocmd FileType c silent if !exists('b:NERDTree') | silent NERDTree | endif
+augroup nerdtree_start
+	autocmd FileType c silent if !exists('b:NERDTree') | silent NERDTree | au! nerdtree_start | endif
 augroup END
 
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup nerdtree
+	" Exit Vim if NERDTree is the only window remaining in the only tab.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	" Close the tab if NERDTree is the only window remaining in it.
+	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	" Open the existing NERDTree on each new tab.
+	autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup END
 
 let g:airline_theme = "powerlineish"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#nerdtree_statusline = 1
 
 
 lua << EOF
