@@ -7,7 +7,7 @@ clone_dir() {
 	local dir=${1:-home}
 	local to=${2:-$HOME}
 
-	mkdir -p "$to/.${dir#home/}"
+	[ "$dir" != "home" ] && mkdir -p "$to/.${dir#home/}"
 	for f in $dir/*; do
 		if [ -d "$f" ]; then
 			clone_dir "$f" "$to"
