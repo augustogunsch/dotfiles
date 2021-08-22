@@ -1,4 +1,8 @@
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="/usr/bin/nvim"
+
+#vim
+alias vim="nvim"
 
 #ls
 alias ls="ls --color=auto"
@@ -7,7 +11,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-export EDITOR="/usr/bin/vim"
 
 # improved reset and clear
 alias reset="tput reset"
