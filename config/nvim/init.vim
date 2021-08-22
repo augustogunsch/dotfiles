@@ -15,6 +15,7 @@ hi Whitespace ctermfg=233
 hi SignColumn ctermbg=233
 
 nnoremap <F5> :set list!<cr>
+nnoremap <F12> :!sample-compile-flags<cr>
 
 noremap - ddp
 nnoremap _ ddkP

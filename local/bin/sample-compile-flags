@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ -e compile_flags.txt ] || printf '%s\n%s\n' '-I' '.' > compile_flags.txt
