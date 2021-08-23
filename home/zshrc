@@ -25,7 +25,7 @@ bindkey "^[[B" history-beginning-search-forward-end
 export PROMPT='%B%F{63}[%F{68}%n@%m %F{white}%~%F{63}]$%b%f '
 
 # aliases:
-source ~/dotfiles/aliases
+source ~/.aliases
 
 # reload with .
 alias .="source ~/.zshrc"
