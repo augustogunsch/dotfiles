@@ -120,7 +120,7 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Editor
-config.set('editor.command', [ 'st', '-e', 'vim', '{file}' ]);
+config.set('editor.command', [ 'st', '-e', 'nvim', '{file}' ]);
 
 # When/how to show the scrollbar.
 # Type: String
