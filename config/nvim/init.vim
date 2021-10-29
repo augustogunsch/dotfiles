@@ -37,7 +37,7 @@ vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>
 nnoremap H 0
 nnoremap L $
 " auto indent
-nnoremap <c-w> gg=G<c-o>
+nnoremap <c-q> gg=G<c-o>
 
 " Used in abbrevs to remove a space
 " append: <c-r>=Eatchar('\s')<cr>
