@@ -1,0 +1,25 @@
+#!/bin/sh
+
+LANG=pob
+
+usage() {
+	echo "usage: dlsubs <files>"
+	exit 1
+}
+
+[ -z "$1" ] && usage
+
+for arg in "$@"; do
+	case "$arg" in
+		*.mkv|*.mp4 ) 
+			if [ ! -f "$arg" ]; then
+				echo "$arg is not a file"
+				usage
+			fi ;;
+		*) echo "$arg is neither a .mkv nor a .mp4 file"; usage ;;
+	esac
+done
+
+for input in "$@"; do
+	subdl --lang=$LANG "$input"
+done

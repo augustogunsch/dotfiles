@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+usage() {
+	echo "usage: tomp4 <files>"
+	exit 1
+}
+
+[ -z "$1" ] && usage
+
+for arg in "$@"; do
+	case "$arg" in
+		*.mkv ) 
+			if [ ! -f "$arg" ]; then
+				echo "$arg is not a file"
+				usage
+			fi ;;
+		*) echo "$arg is not a .mkv file"; usage ;;
+	esac
+done
+
+for input in "$@"; do
+	base=${input%.mkv}
+	output="$base.mp4"
+	tmp="$base.tmp.mp4"
+
+	if [ ! -f "$output" ]; then
+		ffmpeg -i "$input" "$tmp"
+
+		if [ $? -ne 0 ]; then
+			rm "$tmp"
+			exit 1
+		fi
+
+		mv "$tmp" "$output"
+	else
+		"Skipping $input"
+	fi
+done
