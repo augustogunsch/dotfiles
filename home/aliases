@@ -1,26 +1,44 @@
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 
-#vim
+# vim
 alias vim="nvim"
 
-#ls
+# ls
 alias ls="ls --color=auto"
 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
 
 # improved reset and clear
 alias reset="tput reset"
 alias clear="tput reset"
 
 # better du
-alias du="du -h"
+alias du="du -hd 1"
 
-#better feh
+# better feh
 alias feh="feh -."
 
-#vi keybindings
+# vi keybindings
 alias info="info --vi-keys"
+
+# grepa
+alias grepa="grep -n --color=always -r --exclude-dir=venv"
+
+# less
+alias less="less -R"
+
+# find
+alias find="find -name"
+
+# sl
+alias sl="ls"
+
+finder() {
+	grepa "$1" | less
+}

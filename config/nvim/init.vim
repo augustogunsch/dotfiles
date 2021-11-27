@@ -18,8 +18,9 @@ filetype indent off
 hi Whitespace ctermfg=233
 hi SignColumn ctermbg=233
 
+nnoremap <F12> :set et<cr>:set ts=4<cr>:set sw=4<cr>
+nnoremap <F11> :set noet<cr>:set ts=8<cr>:set sw=8<cr>
 nnoremap <F5> :set list!<cr>
-nnoremap <F12> :!sample-compile-flags<cr>
 
 noremap - ddp
 nnoremap _ ddkP
@@ -37,14 +38,7 @@ vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>
 nnoremap H 0
 nnoremap L $
 " auto indent
-nnoremap <c-q> gg=G<c-o>
-
-" Used in abbrevs to remove a space
-" append: <c-r>=Eatchar('\s')<cr>
-func Eatchar(pat)
-	let c = nr2char(getchar(0))
-	return (c =~ a:pat) ? '' : c
-endfunc
+"vnoremap <c-q> <esc>:lua vim.lsp.buf.range_formatting()<cr>
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -65,7 +59,7 @@ Plug 'drmingdrmer/xptemplate'
 
 call plug#end()
 
-nnoremap <C-n> :silent NERDTreeToggle<CR>
+nnoremap <C-n> <cmd>silent NERDTreeToggle<CR>
 
 augroup nerdtree
 	" Exit Vim if NERDTree is the only window remaining in the only tab.
@@ -107,29 +101,50 @@ require'compe'.setup {
 --- IMPORTANT
 vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 
---- LSP
-local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local common_bindings = function(client, bufnr)
 	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
 	--Enable completion triggered by <c-x><c-o>
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'clangd', 'rls', 'tsserver' }
-for _, lsp in ipairs(servers) do
+local default_formatting = function(client, bufnr)
+	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+	local opts = { noremap=true, silent=true }
+
+	buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+local default_attach = function(client, bufnr)
+	common_bindings(client, bufnr)
+	default_formatting(client, bufnr)
+end
+
+
+local setup = function(lsp, on_attach, options)
+	local nvim_lsp = require('lspconfig')
+
 	nvim_lsp[lsp].setup {
 		on_attach = on_attach,
 		flags = {
 			debounce_text_changes = 150,
-		}
+		},
+		options=options
 	}
 end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pylsp', 'clangd', 'rls', 'tsserver' }
+for _, lsp in ipairs(servers) do
+	setup(lsp, default_attach)
+end
+
+-- Servers with custom setup
+
+-- placeholder
+
 EOF
 
 " auto close scratch buffer (preview window)
