@@ -122,7 +122,7 @@ local default_attach = function(client, bufnr)
 end
 
 
-local setup = function(lsp, on_attach, options)
+local setup = function(lsp, on_attach, settings)
 	local nvim_lsp = require('lspconfig')
 
 	nvim_lsp[lsp].setup {
@@ -130,20 +130,36 @@ local setup = function(lsp, on_attach, options)
 		flags = {
 			debounce_text_changes = 150,
 		},
-		options=options
+		settings=settings
 	}
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'clangd', 'rls', 'tsserver' }
+local servers = { 'clangd', 'rls', 'tsserver' }
 for _, lsp in ipairs(servers) do
 	setup(lsp, default_attach)
 end
 
 -- Servers with custom setup
 
--- placeholder
+-- pylsp
+local attach_pylsp = function(client, bufnr)
+	common_bindings(client, bufnr)
+
+end
+
+local pylsp_settings = {
+	pylsp = {
+		plugins = {
+			pycodestyle = {
+				ignore = {'E501'}
+			}
+		}
+	}
+}
+
+setup('pylsp', attach_pylsp, pylsp_settings)
 
 EOF
 
