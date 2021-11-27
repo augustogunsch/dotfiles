@@ -144,11 +144,6 @@ end
 -- Servers with custom setup
 
 -- pylsp
-local attach_pylsp = function(client, bufnr)
-	common_bindings(client, bufnr)
-
-end
-
 local pylsp_settings = {
 	pylsp = {
 		plugins = {
@@ -159,7 +154,7 @@ local pylsp_settings = {
 	}
 }
 
-setup('pylsp', attach_pylsp, pylsp_settings)
+setup('pylsp', default_attach, pylsp_settings)
 
 EOF
 
