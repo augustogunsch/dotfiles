@@ -1,4 +1,4 @@
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 
 # vim
@@ -38,6 +38,9 @@ alias find="find -name"
 
 # sl
 alias sl="ls"
+
+#la
+alias la="ls -a"
 
 finder() {
 	grepa "$1" | less
