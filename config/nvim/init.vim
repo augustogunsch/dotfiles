@@ -17,21 +17,29 @@ set nohlsearch
 filetype indent off
 hi Whitespace ctermfg=233
 hi SignColumn ctermbg=233
-
-nnoremap <F12> :set et<cr>:set ts=4<cr>:set sw=4<cr>
-nnoremap <F11> :set noet<cr>:set ts=8<cr>:set sw=8<cr>
-nnoremap <F5> :set list!<cr>
-
-noremap - ddp
-nnoremap _ ddkP
+hi DiffChange ctermbg=17
+hi DiffDelete ctermbg=52 ctermfg=15
+hi DiffAdd ctermbg=22
+hi DiffText ctermbg=166 ctermfg=15
+hi Folded ctermbg=233 ctermfg=247
+hi FoldColumn ctermbg=233 ctermfg=247
 
 let mapleader = " "
 let maplocalleader = ","
 
-nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <C-s> :%s//gc<left><left><left>
-nnoremap <C-w>t :tabnew<cr>
+nnoremap <silent> <F12> <cmd>set et<cr>:set ts=4<cr>:set sw=4<cr>
+nnoremap <silent> <F11> <cmd>set noet<cr>:set ts=8<cr>:set sw=8<cr>
+nnoremap <silent> <F2> <cmd>ToggleDiagOff<cr>:Gdiffsplit<cr>
+nnoremap <silent> <F5> <cmd>ToggleDiag<cr>
+
+noremap - ddp
+nnoremap _ ddkP
+
+nnoremap <silent> <leader>ev <cmd>tabnew $MYVIMRC<cr>
+nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr>
+nnoremap <C-s> <cmd>%s//gc<left><left><left>
+nnoremap <silent> <C-w>t <cmd>tabnew<cr>
+nnoremap dL 0D
 
 " auto quote
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>
@@ -57,6 +65,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'drmingdrmer/xptemplate'
 
+Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+
 call plug#end()
 
 nnoremap <C-n> <cmd>silent NERDTreeToggle<CR>
@@ -66,15 +76,12 @@ augroup nerdtree
 	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 	" Close the tab if NERDTree is the only window remaining in it.
 	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-	" Open the existing NERDTree on each new tab.
-	autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 augroup END
 
 let g:airline_theme = "powerlineish"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#nerdtree_statusline = 1
-
 
 lua << EOF
 --- nvim-compe
@@ -148,6 +155,7 @@ local pylsp_settings = {
 	pylsp = {
 		plugins = {
 			pycodestyle = {
+				enabled = true,
 				ignore = {'E501'}
 			}
 		}
