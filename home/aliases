@@ -28,7 +28,7 @@ alias feh="feh -."
 alias info="info --vi-keys"
 
 # grepa
-alias grepa="grep -n --color=always -r --exclude-dir=venv"
+alias grepa="grep -I -n --color=always -r --exclude-dir=venv"
 
 # less
 alias less="less -R"
@@ -42,6 +42,16 @@ alias sl="ls"
 #la
 alias la="ls -a"
 
-finder() {
-	grepa "$1" | less
+search() {
+	grepa "$@" . | sed -nE '/^.{,200}$/p'
+}
+
+goto() {
+	open="$(search "$@" | fzf --ansi)"
+	if [ ! -z "$open" ]; then
+		file="$(echo "$open" | cut -d: -f1 -)"
+		line="$(echo "$open" | cut -d: -f2 -)"
+
+		vim "$file" -c "normal! $line"gg
+	fi
 }

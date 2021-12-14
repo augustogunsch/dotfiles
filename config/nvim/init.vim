@@ -37,7 +37,7 @@ nnoremap _ ddkP
 
 nnoremap <silent> <leader>ev <cmd>tabnew $MYVIMRC<cr>
 nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr>
-nnoremap <C-s> <cmd>%s//gc<left><left><left>
+nnoremap <C-s> :%s//gc<left><left><left>
 nnoremap <silent> <C-w>t <cmd>tabnew<cr>
 nnoremap dL 0D
 
@@ -156,7 +156,7 @@ local pylsp_settings = {
 		plugins = {
 			pycodestyle = {
 				enabled = true,
-				ignore = {'E501'}
+				ignore = {'E501', 'E711'}
 			}
 		}
 	}
