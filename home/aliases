@@ -43,11 +43,11 @@ alias sl="ls"
 alias la="ls -a"
 
 search() {
-	grepa "$@" . | sed -nE '/^.{,200}$/p'
+	grepa "$@" .
 }
 
 goto() {
-	open="$(search "$@" | fzf --ansi)"
+	open="$(search "$@" | fzf --ansi -1)"
 	if [ ! -z "$open" ]; then
 		file="$(echo "$open" | cut -d: -f1 -)"
 		line="$(echo "$open" | cut -d: -f2 -)"
