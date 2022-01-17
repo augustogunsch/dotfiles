@@ -28,7 +28,7 @@ alias feh="feh -."
 alias info="info --vi-keys"
 
 # grepa
-alias grepa="grep -I -n --color=always -r --exclude-dir=venv"
+alias grepa="grep -I -n --color=always -r --exclude-dir=venv --exclude-dir=node_modules"
 
 # less
 alias less="less -R"
@@ -52,6 +52,6 @@ goto() {
 		file="$(echo "$open" | cut -d: -f1 -)"
 		line="$(echo "$open" | cut -d: -f2 -)"
 
-		vim "$file" -c "normal! $line"gg
+		vim "$file" -c "cd %:p:h" -c "normal! $line"gg
 	fi
 }

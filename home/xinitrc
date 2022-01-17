@@ -1,3 +1,4 @@
+xrandr --dpi 96
 xset s off -dpms
 customkeys
 xdg-mime default mupdf.desktop application/pdf

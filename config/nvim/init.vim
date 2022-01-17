@@ -11,9 +11,6 @@ colorscheme torte
 set list
 set listchars=tab:*·,lead:·,trail:~,extends:>,precedes:<
 set noet
-set ts=8
-set sw=8
-set nohlsearch
 filetype indent off
 hi Whitespace ctermfg=233
 hi SignColumn ctermbg=233
@@ -27,10 +24,12 @@ hi FoldColumn ctermbg=233 ctermfg=247
 let mapleader = " "
 let maplocalleader = ","
 
-nnoremap <silent> <F12> <cmd>set et<cr>:set ts=4<cr>:set sw=4<cr>
-nnoremap <silent> <F11> <cmd>set noet<cr>:set ts=8<cr>:set sw=8<cr>
+nnoremap <silent> <F12> <cmd>set et<cr><cmd>set ts=4<cr><cmd>set sw=4<cr>
+nnoremap <silent> <F11> <cmd>set noet<cr>
 nnoremap <silent> <F2> <cmd>ToggleDiagOff<cr>:Gdiffsplit<cr>
 nnoremap <silent> <F5> <cmd>ToggleDiag<cr>
+nnoremap <silent> <F6> <cmd>%!expand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
+nnoremap <silent> <F7> <cmd>%!unexpand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
 
 noremap - ddp
 nnoremap _ ddkP
@@ -45,8 +44,6 @@ nnoremap dL 0D
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>
 nnoremap H 0
 nnoremap L $
-" auto indent
-"vnoremap <c-q> <esc>:lua vim.lsp.buf.range_formatting()<cr>
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -70,6 +67,10 @@ Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 call plug#end()
 
 nnoremap <C-n> <cmd>silent NERDTreeToggle<CR>
+
+augroup python
+	autocmd FileType python :iabbrev <buffer> frompdb from pdb import set_trace; set_trace()
+augroup END
 
 augroup nerdtree
 	" Exit Vim if NERDTree is the only window remaining in the only tab.
