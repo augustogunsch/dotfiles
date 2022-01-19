@@ -1,2 +1,1 @@
-remove control = Control_R
-keysym Control_R = dead_greek
+keycode 151 = Multi_key Multi_key Multi_key
