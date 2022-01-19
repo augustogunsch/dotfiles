@@ -255,13 +255,16 @@ globalkeys = gears.table.join(
     awful.key({ }, "Print", function () awful.util.spawn("flameshot gui -p ~/shots", false) end),
 
     -- Volume widget
-    awful.key({ modkey,           }, "F3", function() volume_widget:inc(5) end),
-    awful.key({ modkey,           }, "F2", function() volume_widget:dec(5) end),
-    awful.key({ modkey,           }, "F1", function() volume_widget:toggle() end),
+    awful.key({ modkey,           }, "F3", function() volume_widget:inc(5) end, {description = "increase volume", group = "custom"}),
+    awful.key({ modkey,           }, "F2", function() volume_widget:dec(5) end, {description = "decrease volume", group = "custom"}),
+    awful.key({ modkey,           }, "F1", function() volume_widget:toggle() end, {description = "toggle mute", group = "custom"}),
 
     -- Brightness widget
     awful.key({ modkey,           }, "F6", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
     awful.key({ modkey,           }, "F5", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
+
+    -- cmus toggle paused
+    awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("cmus-remote -u") end, {description = "play/pause cmus", group = "custom"}),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
