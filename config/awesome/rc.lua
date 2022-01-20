@@ -252,7 +252,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
             wibox.widget.separator{
                 orientation = "vertical",
-                forced_width = 10
+                forced_width = 5
             },
             battery_widget{
                 enable_battery_warning = true
