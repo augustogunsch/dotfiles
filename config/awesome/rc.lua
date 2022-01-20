@@ -244,13 +244,29 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             spacing = 10,
             --mykeyboardlayout,
+            wibox.widget.separator{
+                orientation = "vertical",
+                forced_width = 5,
+                visible = false
+            },
             wibox.widget.systray(),
-            battery_widget(),
+            wibox.widget.separator{
+                orientation = "vertical",
+                forced_width = 10
+            },
+            battery_widget{
+                enable_battery_warning = true
+            },
             brightness_widget {
                 type = 'icon_and_text',
                 program = 'brightnessctl',
+                percentage = false
             },
-	    volume_widget(),
+        volume_widget{
+            widget_type = 'horizontal_bar',
+            with_icon = true,
+            mute_color = beautiful.bg_urgent
+        },
             mytextclock,
             s.mylayoutbox,
         },
@@ -625,29 +641,6 @@ local function trim(s)
   return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
 end
 
--- Low battery notification
-local function bat_notification()
-
-  local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
-  local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
-
-  local bat_capacity = tonumber(f_capacity:read("*all"))
-  local bat_status = trim(f_status:read("*all"))
-
-  if (bat_capacity <= 10 and bat_status == "Discharging") then
-    naughty.notify({ title      = "Battery Warning"
-      , text       = "Battery low! " .. bat_capacity .."%" .. " left!"
-      , fg="#ff0000"
-      , bg="#deb887"
-      , timeout    = 15
-      , position   = "bottom_left"
-    })
-  end
-end
-
-battimer = timer({timeout = 120})
-battimer:connect_signal("timeout", bat_notification)
-battimer:start()
 
 -- Debian packages for these apps:
 -- - flameshot
