@@ -23,6 +23,7 @@ local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- awesome-wm-widgets
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
@@ -249,6 +250,7 @@ awful.screen.connect_for_each_screen(function(s)
                 type = 'icon_and_text',
                 program = 'brightnessctl',
             },
+	    volume_widget(),
             mytextclock,
             s.mylayoutbox,
         },
@@ -650,14 +652,12 @@ battimer:start()
 -- Debian packages for these apps:
 -- - flameshot
 -- - compton
--- - volumeicon-alsa
 -- - unclutter
 
 -- Autostart applications
 run_once({"compton",
           "flameshot",
           "nm-applet",
-          "volumeicon",
           "unclutter"})
 
 awful.spawn("customkeys")
