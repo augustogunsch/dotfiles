@@ -25,7 +25,6 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- awesome-wm-widgets
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -54,12 +53,23 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+theme = gears.filesystem.get_configuration_dir() .. "themes/default/theme.lua"
+
+if not beautiful.init(theme) then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = string.format("Couldn't load custom theme at %s! Falling back to the default one.", theme),
+                     text = awesome.startup_errors })
+
+    beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua") -- Fallback to default themes
+end
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
+terminal     = "alacritty"
+editor       = os.getenv("EDITOR") or "nvim"
+editor_cmd   = terminal .. " -e " .. editor
+
+-- Screen locker command
+scrlocker    = "cinnamon-screensaver-command -l"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -172,6 +182,12 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
+local function run_once(cmd_arr)
+    for _, cmd in ipairs(cmd_arr) do
+        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
+    end
+end
+
 local function set_wallpaper(s)
     awful.spawn.with_shell("nitrogen --restore")
 end
@@ -184,7 +200,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[2])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[2])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -225,7 +241,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spacing = 5,
+            spacing = 10,
             --mykeyboardlayout,
             wibox.widget.systray(),
             battery_widget(),
@@ -233,7 +249,6 @@ awful.screen.connect_for_each_screen(function(s)
                 type = 'icon_and_text',
                 program = 'brightnessctl',
             },
-            volume_widget(),
             mytextclock,
             s.mylayoutbox,
         },
@@ -255,13 +270,13 @@ globalkeys = gears.table.join(
     awful.key({ }, "Print", function () awful.util.spawn("flameshot gui -p ~/shots", false) end),
 
     -- Volume widget
-    awful.key({ modkey,           }, "F3", function() volume_widget:inc(5) end, {description = "increase volume", group = "custom"}),
-    awful.key({ modkey,           }, "F2", function() volume_widget:dec(5) end, {description = "decrease volume", group = "custom"}),
-    awful.key({ modkey,           }, "F1", function() volume_widget:toggle() end, {description = "toggle mute", group = "custom"}),
+    awful.key({ }, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end, {description = "increase volume", group = "custom"}),
+    awful.key({ }, "XF86AudioLowerVolume", function() volume_widget:dec(5) end, {description = "decrease volume", group = "custom"}),
+    awful.key({ }, "XF86AudioMute", function() volume_widget:toggle() end, {description = "toggle mute", group = "custom"}),
 
     -- Brightness widget
-    awful.key({ modkey,           }, "F6", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
-    awful.key({ modkey,           }, "F5", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
+    awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
+    awful.key({ }, "XF86MonBrightnessDown", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
 
     -- cmus toggle paused
     awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("cmus-remote -u") end, {description = "play/pause cmus", group = "custom"}),
@@ -363,7 +378,11 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- Lock Screen
+    awful.key({ modkey, "Shift" }, "l", function() awful.spawn(scrlocker) end,
+              {description = "lock the screen", group = "custom"})
 )
 
 clientkeys = gears.table.join(
@@ -413,7 +432,7 @@ clientkeys = gears.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 10 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
@@ -628,9 +647,17 @@ battimer = timer({timeout = 120})
 battimer:connect_signal("timeout", bat_notification)
 battimer:start()
 
+-- Debian packages for these apps:
+-- - flameshot
+-- - compton
+-- - volumeicon-alsa
+-- - unclutter
+
 -- Autostart applications
-awful.spawn.with_shell("compton")
-awful.spawn.with_shell("flameshot")
-awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("blueman-applet")
+run_once({"compton",
+          "flameshot",
+          "nm-applet",
+          "volumeicon",
+          "unclutter"})
+
 awful.spawn("customkeys")
