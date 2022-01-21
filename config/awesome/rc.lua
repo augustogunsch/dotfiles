@@ -262,11 +262,11 @@ awful.screen.connect_for_each_screen(function(s)
                 program = 'brightnessctl',
                 percentage = false
             },
-        volume_widget{
-            widget_type = 'horizontal_bar',
-            with_icon = true,
-            mute_color = beautiful.bg_urgent
-        },
+            volume_widget{
+                widget_type = 'icon_and_text',
+                with_icon = true,
+                mute_color = beautiful.bg_urgent
+            },
             mytextclock,
             s.mylayoutbox,
         },
