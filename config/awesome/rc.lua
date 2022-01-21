@@ -399,7 +399,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 
     -- Lock Screen
-    awful.key({ modkey, "Shift" }, "l", function() awful.spawn(scrlocker) end,
+    awful.key({ }, "XF86Display", function() awful.spawn(scrlocker) end,
               {description = "lock the screen", group = "custom"})
 )
 
