@@ -285,7 +285,7 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-    awful.key({ }, "Print", function () awful.util.spawn("flameshot gui -p ~/shots", false) end),
+    awful.key({ }, "Print", function () awful.util.spawn("flameshot gui", false) end),
 
     -- Volume widget
     awful.key({ }, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end, {description = "increase volume", group = "custom"}),
