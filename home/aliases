@@ -26,28 +26,17 @@ alias feh="feh -."
 
 # vi keybindings
 alias info="info --vi-keys"
+alias less="less -R"
+alias find="find -name"
+alias sl="ls"
+alias la="ls -a"
+alias venv="source venv/bin/activate"
 
-# grepa
+# search functions
 alias grepa="grep -I -n --color=always -r --exclude-dir=venv --exclude-dir=node_modules"
 
-# less
-alias less="less -R"
-
-# find
-alias find="find -name"
-
-# sl
-alias sl="ls"
-
-#la
-alias la="ls -a"
-
-search() {
-	grepa "$@" .
-}
-
 goto() {
-	open="$(search "$@" | fzf --ansi -1)"
+	open="$(grepa "$@" | fzf --ansi -1)"
 	if [ ! -z "$open" ]; then
 		file="$(echo "$open" | cut -d: -f1 -)"
 		line="$(echo "$open" | cut -d: -f2 -)"
@@ -55,3 +44,6 @@ goto() {
 		vim "$file" -c "cd %:p:h" -c "normal! $line"gg
 	fi
 }
+
+# NVM - Dynamic loading trick
+alias nvm="unalias nvm && source /usr/share/nvm/init-nvm.sh && nvm"
