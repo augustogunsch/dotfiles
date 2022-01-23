@@ -252,10 +252,10 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             {
                 widget = wibox.container.margin,
-                right = 4,
+                right = 7,
                 {
                     layout = wibox.layout.fixed.horizontal,
-                    spacing = 10,
+                    spacing = 14,
                     wibox.widget.separator{
                         orientation = "vertical",
                         forced_width = 5,
@@ -271,16 +271,16 @@ awful.screen.connect_for_each_screen(function(s)
             {
                 cmus_widget(),
                 widget = wibox.container.margin,
-                right = 5,
-                left = 5,
+                right = 7,
+                left = 7,
                 draw_empty = false
             },
             {
                 widget = wibox.container.margin,
-                left = 6,
+                left = 7,
                 {
                     layout = wibox.layout.fixed.horizontal,
-                    spacing = 10,
+                    spacing = 14,
                     volume_widget{
                         widget_type = 'icon_and_text',
                         with_icon = true,
@@ -326,7 +326,7 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86MonBrightnessDown", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
 
     -- cmus toggle paused
-    awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("cmus-remote -u") end, {description = "play/pause cmus", group = "custom"}),
+    awful.key({ modkey, "Shift"   }, "p", function () cmus_widget:play_pause() end, {description = "play/pause cmus", group = "custom"}),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
