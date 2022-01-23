@@ -269,11 +269,11 @@ awful.screen.connect_for_each_screen(function(s)
                 program = 'brightnessctl',
                 percentage = false
             },
-        volume_widget{
-            widget_type = 'icon_and_text',
-            with_icon = true,
-            mute_color = beautiful.bg_urgent
-        },
+            volume_widget{
+                widget_type = 'icon_and_text',
+                with_icon = true,
+                mute_color = beautiful.bg_urgent
+            },
             mytextclock,
             s.mylayoutbox,
         },
@@ -292,7 +292,7 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-    awful.key({ }, "Print", function () awful.util.spawn("flameshot gui -p ~/shots", false) end),
+    awful.key({ }, "Print", function () awful.util.spawn("flameshot gui", false) end),
 
     -- Volume widget
     awful.key({ }, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end, {description = "increase volume", group = "custom"}),
@@ -406,7 +406,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 
     -- Lock Screen
-    awful.key({ modkey, "Shift" }, "l", function() awful.spawn(scrlocker) end,
+    awful.key({ }, "XF86Display", function() awful.spawn(scrlocker) end,
               {description = "lock the screen", group = "custom"})
 )
 

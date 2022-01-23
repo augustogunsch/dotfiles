@@ -175,12 +175,62 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night)
+# Colors (Hyper)
+#colors:
+  #primary:
+    #background: '0x000000'
+    #foreground: '0xffffff'
+  #cursor:
+    #text: '0xF81CE5'
+    #cursor: '0xffffff'
+  #normal:
+    #black:   '0x000000'
+    #red:     '0xfe0100'
+    #green:   '0x33ff00'
+    #yellow:  '0xfeff00'
+    #blue:    '0x0066ff'
+    #magenta: '0xcc00ff'
+    #cyan:    '0x00ffff'
+    #white:   '0xd0d0d0'
+  #bright:
+    #black:   '0x808080'
+    #red:     '0xfe0100'
+    #green:   '0x33ff00'
+    #yellow:  '0xfeff00'
+    #blue:    '0x0066ff'
+    #magenta: '0xcc00ff'
+    #cyan:    '0x00ffff'
+    #white:   '0xFFFFFF'
+
+# XTerm's default colors
 colors:
-  # Default colors
   primary:
+    background: '0x000000'
+    foreground: '0xffffff'
+  normal:
+    black:   '0x000000'
+    red:     '0xcd0000'
+    green:   '0x00cd00'
+    yellow:  '0xcdcd00'
+    blue:    '0x0000ee'
+    magenta: '0xcd00cd'
+    cyan:    '0x00cdcd'
+    white:   '0xe5e5e5'
+  bright:
+    black:   '0x7f7f7f'
+    red:     '0xff0000'
+    green:   '0x00ff00'
+    yellow:  '0xffff00'
+    blue:    '0x5c5cff'
+    magenta: '0xff00ff'
+    cyan:    '0x00ffff'
+    white:   '0xffffff'
+
+# Colors (Tomorrow Night)
+#colors:
+  # Default colors
+  #primary:
   #  background: '#1d1f21'
-    background: '#000000'
   #  foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
@@ -268,16 +318,15 @@ colors:
   #  background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '#000000'
-    red:     '#ff1111'
-    green:   '#11ff11'
+  #normal:
+  #  black:   '#000000'
+  #  red:     '#ff1111'
+  #  green:   '#11ff11'
   #  yellow:  '#f0c674'
   #  blue:    '#81a2be'
-    blue:    '#1111ff'
   #  magenta: '#b294bb'
   #  cyan:    '#8abeb7'
-    white:   '#ffffff'
+  #  white:   '#ffffff'
 
   # Bright colors
   #bright:
@@ -721,7 +770,8 @@ colors:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
