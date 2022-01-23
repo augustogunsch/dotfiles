@@ -270,7 +270,7 @@ awful.screen.connect_for_each_screen(function(s)
                 percentage = false
             },
         volume_widget{
-            widget_type = 'horizontal_bar',
+            widget_type = 'icon_and_text',
             with_icon = true,
             mute_color = beautiful.bg_urgent
         },
