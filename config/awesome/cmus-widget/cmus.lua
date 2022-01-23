@@ -29,7 +29,7 @@ local function worker(user_args)
     local path_to_icons = args.path_to_icons or "/usr/share/icons/Arc/actions/symbolic/"
     local timeout = args.timeout or 10
 
-    cmus_widget = wibox.widget {
+    cmus_widget.widget = wibox.widget {
         {
             {
                 id = "playback_icon",
@@ -52,8 +52,7 @@ local function worker(user_args)
         end
     }
 
-    watch("cmus-remote -Q", timeout,
-    function(widget, stdout, _, _, code)
+    function update_widget(widget, stdout, _, _, code)
         if code == 0 then
             local cmus_info = {}
 
@@ -101,10 +100,25 @@ local function worker(user_args)
         else
             widget.visible = false
         end
-    end,
-    cmus_widget)
+    end
 
-    return cmus_widget
+    function cmus_widget:play_pause()
+        spawn("cmus-remote -u")
+        spawn.easy_async("cmus-remote -Q",
+        function(stdout, _, _, code)
+            update_widget(cmus_widget.widget, stdout, _, _, code)
+        end)
+    end
+
+    cmus_widget.widget:buttons(
+            awful.util.table.join(
+                    awful.button({}, 1, function() cmus_widget:play_pause() end)
+            )
+    )
+
+    watch("cmus-remote -Q", timeout, update_widget, cmus_widget.widget)
+
+    return cmus_widget.widget
 end
 
 return setmetatable(cmus_widget, { __call = function(_, ...)
