@@ -23,6 +23,7 @@ local is_deb, debian = pcall(require, "debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- awesome-wm-widgets
+local cmus_widget = require("cmus-widget.cmus")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
@@ -247,36 +248,57 @@ awful.screen.connect_for_each_screen(function(s)
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
-        { -- Right widgets
+        {
             layout = wibox.layout.fixed.horizontal,
-            spacing = 10,
-            --mykeyboardlayout,
-            wibox.widget.separator{
-                orientation = "vertical",
-                forced_width = 5,
-                visible = false
+            {
+                widget = wibox.container.margin,
+                right = 4,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    spacing = 10,
+                    wibox.widget.separator{
+                        orientation = "vertical",
+                        forced_width = 5,
+                        visible = false
+                    },
+                    wibox.widget.systray(),
+                    wibox.widget.separator{
+                        orientation = "vertical",
+                        forced_width = 5
+                    }
+                }
             },
-            wibox.widget.systray(),
-            wibox.widget.separator{
-                orientation = "vertical",
-                forced_width = 5
+            {
+                cmus_widget(),
+                widget = wibox.container.margin,
+                right = 5,
+                left = 5,
+                draw_empty = false
             },
-            battery_widget{
-                enable_battery_warning = true
-            },
-            brightness_widget {
-                type = 'icon_and_text',
-                program = 'brightnessctl',
-                percentage = false
-            },
-            volume_widget{
-                widget_type = 'icon_and_text',
-                with_icon = true,
-                mute_color = beautiful.bg_urgent
-            },
-            mytextclock,
-            s.mylayoutbox,
-        },
+            {
+                widget = wibox.container.margin,
+                left = 6,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    spacing = 10,
+                    volume_widget{
+                        widget_type = 'icon_and_text',
+                        with_icon = true,
+                        mute_color = beautiful.bg_urgent
+                    },
+                    --battery_widget{
+                        --enable_battery_warning = true
+                    --},
+                    --brightness_widget {
+                        --type = 'icon_and_text',
+                        --program = 'brightnessctl',
+                        --percentage = false
+                    --},
+                    mytextclock,
+                    s.mylayoutbox,
+                }
+            }
+        }
     }
 end)
 -- }}}
