@@ -658,6 +658,7 @@ end
 run_once({"compton",
           "flameshot",
           "nm-applet",
+          "lxpolkit",
           "unclutter"})
 
 awful.spawn("customkeys")
