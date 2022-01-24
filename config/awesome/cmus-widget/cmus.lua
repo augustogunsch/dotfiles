@@ -24,10 +24,11 @@ end
 local function worker(user_args)
 
     local args = user_args or {}
-    local font = args.font or "Play 9"
+    local font = args.font or "Play 8"
 
     local path_to_icons = args.path_to_icons or "/usr/share/icons/Arc/actions/symbolic/"
     local timeout = args.timeout or 10
+    local space = args.space or 3
 
     cmus_widget.widget = wibox.widget {
         {
@@ -43,6 +44,7 @@ local function worker(user_args)
             font = font,
             widget = wibox.widget.textbox
         },
+        spacing = space,
         layout = wibox.layout.fixed.horizontal,
         update_icon = function(self, name)
             self:get_children_by_id("playback_icon")[1]:set_image(path_to_icons .. name)
@@ -104,7 +106,7 @@ local function worker(user_args)
 
     function cmus_widget:play_pause()
         spawn("cmus-remote -u")
-        spawn.easy_async("cmus-remote -Q",
+        spawn.easy_async_with_shell("cmus-remote -Q",
         function(stdout, _, _, code)
             update_widget(cmus_widget.widget, stdout, _, _, code)
         end)
