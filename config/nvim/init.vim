@@ -7,6 +7,7 @@ set nu rnu
 set smartindent
 set nocp
 set bo=all
+set mouse=a
 colorscheme torte
 set list
 set listchars=tab:*·,lead:·,trail:~,extends:>,precedes:<
@@ -30,6 +31,8 @@ nnoremap <silent> <F2> <cmd>ToggleDiagOff<cr>:Gdiffsplit<cr>
 nnoremap <silent> <F5> <cmd>ToggleDiag<cr>
 nnoremap <silent> <F6> <cmd>%!expand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
 nnoremap <silent> <F7> <cmd>%!unexpand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
+nnoremap <silent> <F8> <cmd>TagbarToggle<CR>
+nnoremap <silent> <C-n> <cmd>NERDTreeToggle<CR>
 
 noremap - ddp
 nnoremap _ ddkP
@@ -64,9 +67,11 @@ Plug 'drmingdrmer/xptemplate'
 
 Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
-call plug#end()
+Plug 'preservim/tagbar'
 
-nnoremap <C-n> <cmd>silent NERDTreeToggle<CR>
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
 
 augroup python
 	autocmd FileType python :iabbrev <buffer> frompdb from pdb import set_trace; set_trace()
@@ -111,9 +116,14 @@ vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 
 local common_bindings = function(client, bufnr)
 	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+	local opts = { noremap=true, silent=true }
 
 	--Enable completion triggered by <c-x><c-o>
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+	buf_set_keymap('n', '<C-[>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 end
 
 local default_formatting = function(client, bufnr)
@@ -144,27 +154,10 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'rls', 'tsserver' }
+local servers = { 'clangd', 'rls', 'tsserver', 'jedi_language_server' }
 for _, lsp in ipairs(servers) do
 	setup(lsp, default_attach)
 end
-
--- Servers with custom setup
-
--- pylsp
-local pylsp_settings = {
-	pylsp = {
-		plugins = {
-			pycodestyle = {
-				enabled = true,
-				ignore = {'E501', 'E711'}
-			}
-		}
-	}
-}
-
-setup('pylsp', default_attach, pylsp_settings)
-
 EOF
 
 " auto close scratch buffer (preview window)

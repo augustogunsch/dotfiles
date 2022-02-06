@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+CMD="$1"
+shift 1
+WINDOW=$(xdotool getwindowfocus)
+xdotool windowunmap "$WINDOW"
+$CMD "$@" > /dev/null 2>&1
+xdotool windowmap "$WINDOW"

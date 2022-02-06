@@ -27,7 +27,6 @@ alias feh="feh -."
 # vi keybindings
 alias info="info --vi-keys"
 alias less="less -R"
-alias find="find -name"
 alias sl="ls"
 alias la="ls -a"
 alias venv="source venv/bin/activate"
@@ -46,4 +45,7 @@ goto() {
 }
 
 # NVM - Dynamic loading trick
-alias nvm="unalias nvm && source /usr/share/nvm/init-nvm.sh && nvm"
+alias nvm="unalias nvm && [ -z $NVM_LOADED ] && export NVM_LOADED=1 && source /usr/share/nvm/init-nvm.sh ; nvm"
+alias node="unalias node && [ -z $NVM_LOADED ] && export NVM_LOADED=1 && source /usr/share/nvm/init-nvm.sh ; node"
+
+source "$HOME/.swallow"
