@@ -1,0 +1,40 @@
+#!/usr/bin/python3.9
+from sys import argv, stderr
+from subprocess import run
+from os import system
+import readline
+
+PROMPT = 'dict> '
+
+def print_databases(file=stderr):
+    proc = run(('dict', '-D'), encoding='utf-8', capture_output=True)
+    print(proc.stdout, file=file, end='')
+
+if len(argv) != 2:
+    print('usage: %s <database>' % argv[0], file=stderr)
+    print_databases()
+    exit(1)
+
+db = argv[1]
+
+proc = run(('dict', '-d', db, 'dummy'), capture_output=True)
+if proc.returncode == 39:
+    print('ERROR: invalid database', file=stderr)
+    print_databases()
+    exit(1)
+
+try:
+    while True:
+        word = input(PROMPT)
+        if word:
+            proc = run(('dict', '-f', '-d', db, word), encoding='utf-8', capture_output=True)
+            if proc.stdout:
+                lines = proc.stdout.splitlines()
+                lines = lines[2:]
+                print()
+                print('\n'.join(lines))
+                print()
+            else:
+                print('\nNo definitions found', end='\n\n')
+except (EOFError, KeyboardInterrupt):
+    print()

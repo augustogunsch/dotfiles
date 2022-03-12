@@ -34,6 +34,11 @@ alias venv="source venv/bin/activate"
 # search functions
 alias grepa="grep -I -n --color=always -r --exclude-dir=venv --exclude-dir=node_modules"
 
+# pipe yd-dlp to mpv
+ytmpv() {
+	yt-dlp -q -o - "$1" | mpv -
+}
+
 goto() {
 	open="$(grepa "$@" | fzf --ansi -1)"
 	if [ ! -z "$open" ]; then
@@ -47,5 +52,3 @@ goto() {
 # NVM - Dynamic loading trick
 alias nvm="unalias nvm && [ -z $NVM_LOADED ] && export NVM_LOADED=1 && source /usr/share/nvm/init-nvm.sh ; nvm"
 alias node="unalias node && [ -z $NVM_LOADED ] && export NVM_LOADED=1 && source /usr/share/nvm/init-nvm.sh ; node"
-
-source "$HOME/.swallow"

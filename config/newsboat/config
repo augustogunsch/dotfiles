@@ -14,8 +14,8 @@ highlight feedlist "---.*---" magenta default
 
 browser "qutebrowser %u"
 macro f set browser "feh %u"
-macro m set browser "mpv %u"
-macro M set browser "mpv %u" ; open-in-browser ; set browser "qutebrowser %u"
+macro m set browser "yt-dlp -q -o - '%u' | mpv -"
+macro M set browser "yt-dlp -q -o - '%u' | mpv -" ; open-in-browser ; set browser "qutebrowser %u"
 macro q set browser "qutebrowser %u"
 macro d set browser "yt-dlp -f best -o '~/videos/%(title)s.%(ext)s' '%u'"
 macro D set browser "yt-dlp -f best -o '~/videos/%(title)s.%(ext)s' '%u'" ; open-in-browser ; set browser "qutebrowser %u"

@@ -80,11 +80,13 @@ local background_processes = {
     "flameshot",
     "nm-applet",
     "lxpolkit",
-    "unclutter"
+    "unclutter",
+    "autocutsel -d -s PRIMARY",
+    "autocutsel -d"
 }
 
 local reload_programs = {
-    "customkeys"
+    "customkeys",
 }
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -280,14 +282,14 @@ awful.screen.connect_for_each_screen(function(s)
                         with_icon = true,
                         mute_color = beautiful.bg_urgent
                     },
-                    --battery_widget{
-                        --enable_battery_warning = true
-                    --},
-                    --brightness_widget {
-                        --type = 'icon_and_text',
-                        --program = 'brightnessctl',
-                        --percentage = false
-                    --},
+                    battery_widget{
+                        enable_battery_warning = true
+                    },
+                    brightness_widget {
+                        type = 'icon_and_text',
+                        program = 'brightnessctl',
+                        percentage = false
+                    },
                     mytextclock,
                     s.mylayoutbox,
                 }

@@ -120,7 +120,7 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Editor
-config.set('editor.command', [ 'st', '-e', 'nvim', '{file}' ]);
+config.set('editor.command', [ 'alacritty', '-e', 'nvim', '{file}' ]);
 
 # When/how to show the scrollbar.
 # Type: String
@@ -166,7 +166,17 @@ c.tabs.show = 'always'
 # the search engine name to the search term, e.g. `:open google
 # qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}', 'yt': 'https://yewtu.be/search?q={}', 'lb': 'https://lbry.tv/$/search?q={}', 'wp': 'https://en.wikipedia.org/w/index.php?search={}', 'bc': 'https://www.bitchute.com/search/?query={}', 'wiby': 'https://wiby.me/?q={}' }
+c.url.searchengines = {
+        'DEFAULT': 'https://duckduckgo.com/?q={}',
+        'aur': 'https://aur.archlinux.org/packages?O=0&K={}',
+        'ddg': 'https://duckduckgo.com/?q={}',
+        'pypi': 'https://pypi.org/search/?q={}',
+        'aw': 'https://wiki.archlinux.org/index.php?search={}',
+        'yt': 'https://yewtu.be/search?q={}', 'lb': 'https://lbry.tv/$/search?q={}',
+        'wp': 'https://en.wikipedia.org/w/index.php?search={}',
+        'bc': 'https://www.bitchute.com/search/?query={}',
+        'wiby': 'https://wiby.me/?q={}',
+        }
 
 # Background color for hints. Note that you can use a `rgba(...)` value
 # for transparency.

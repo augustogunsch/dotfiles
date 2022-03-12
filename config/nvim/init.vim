@@ -11,7 +11,6 @@ set mouse=a
 colorscheme torte
 set list
 set listchars=tab:*·,lead:·,trail:~,extends:>,precedes:<
-set noet
 filetype indent off
 hi Whitespace ctermfg=233
 hi SignColumn ctermbg=233
@@ -34,19 +33,35 @@ nnoremap <silent> <F7> <cmd>%!unexpand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
 nnoremap <silent> <F8> <cmd>TagbarToggle<CR>
 nnoremap <silent> <C-n> <cmd>NERDTreeToggle<CR>
 
-noremap - ddp
-nnoremap _ ddkP
-
 nnoremap <silent> <leader>ev <cmd>tabnew $MYVIMRC<cr>
 nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr>
 nnoremap <C-s> :%s//gc<left><left><left>
 nnoremap <silent> <C-w>t <cmd>tabnew<cr>
+
 nnoremap dL 0D
+nnoremap - ddp
+nnoremap _ ddkP
 
 " auto quote
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>
 nnoremap H 0
 nnoremap L $
+
+augroup python
+	autocmd FileType python :iabbrev <buffer> frompdb from pdb import set_trace; set_trace()
+augroup END
+
+augroup nerdtree
+	" Exit Vim if NERDTree is the only window remaining in the only tab.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	" Close the tab if NERDTree is the only window remaining in it.
+	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+augroup END
+
+let g:airline_theme = "powerlineish"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#nerdtree_statusline = 1
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -69,25 +84,12 @@ Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
 Plug 'preservim/tagbar'
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'tpope/vim-sleuth'
+
 call plug#end()
-
-augroup python
-	autocmd FileType python :iabbrev <buffer> frompdb from pdb import set_trace; set_trace()
-augroup END
-
-augroup nerdtree
-	" Exit Vim if NERDTree is the only window remaining in the only tab.
-	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-	" Close the tab if NERDTree is the only window remaining in it.
-	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-augroup END
-
-let g:airline_theme = "powerlineish"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#nerdtree_statusline = 1
 
 lua << EOF
 --- nvim-compe
