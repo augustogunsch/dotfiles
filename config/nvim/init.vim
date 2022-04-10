@@ -12,7 +12,6 @@ colorscheme torte
 set list
 set listchars=tab:*·,lead:·,trail:~,extends:>,precedes:<
 filetype indent off
-hi Whitespace ctermfg=233
 hi SignColumn ctermbg=233
 hi DiffChange ctermbg=17
 hi DiffDelete ctermbg=52 ctermfg=15
