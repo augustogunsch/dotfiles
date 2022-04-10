@@ -34,6 +34,9 @@ alias venv="source venv/bin/activate"
 # search functions
 alias grepa="grep -I -n --color=always -r --exclude-dir=venv --exclude-dir=node_modules"
 
+# cat
+alias cat="batcat -p --paging=never"
+
 # pipe yd-dlp to mpv
 ytmpv() {
 	yt-dlp -q -o - "$1" | mpv -
