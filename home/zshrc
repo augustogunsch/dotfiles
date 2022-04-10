@@ -25,6 +25,7 @@ bindkey "^[[B" history-beginning-search-forward-end
 
 
 export PROMPT='%B%F{63}[%F{68}%n@%m %F{white}%~%F{63}]$%b%f '
+export LS_COLORS='di=1;94:ex=4;92:ln=3;96'
 
 # aliases:
 source ~/.aliases
