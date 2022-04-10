@@ -80,9 +80,7 @@ local background_processes = {
     "flameshot",
     "nm-applet",
     "lxpolkit",
-    "unclutter",
-    "autocutsel -d -s PRIMARY",
-    "autocutsel -d"
+    "unclutter"
 }
 
 local reload_programs = {
