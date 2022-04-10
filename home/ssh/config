@@ -1,0 +1,3 @@
+Host vps
+	User root
+	HostName augustogunsch.com
