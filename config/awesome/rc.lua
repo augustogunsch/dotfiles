@@ -197,6 +197,8 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+local mywibox = awful.wibar({ position = "top", screen = s })
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -229,7 +231,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = mywibox
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -423,7 +425,10 @@ globalkeys = gears.table.join(
 
     -- Lock Screen
     awful.key({ }, "XF86Display", function() awful.spawn(scrlocker) end,
-              {description = "lock the screen", group = "custom"})
+              {description = "lock the screen", group = "custom"}),
+
+    awful.key({ modkey  }, "b", function() mywibox.visible = not mywibox.visible end,
+              {description = "toggle wibox", group = "layout"})
 )
 
 clientkeys = gears.table.join(
