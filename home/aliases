@@ -53,5 +53,22 @@ goto() {
 }
 
 # NVM - Dynamic loading trick
-alias nvm="unalias nvm && [ -z $NVM_LOADED ] && export NVM_LOADED=1 && source /usr/share/nvm/init-nvm.sh ; nvm"
-alias node="unalias node && [ -z $NVM_LOADED ] && export NVM_LOADED=1 && source /usr/share/nvm/init-nvm.sh ; node"
+alias nvm="load_nvm; nvm"
+alias node="load_nvm; node"
+alias npm="load_nvm; npm"
+alias npx="load_nvm; npx"
+alias create-react-app="load_nvm; create-react-app"
+
+export NVM_DIR="$HOME/.nvm"
+load_nvm() {
+	if [ -z $NVM_LOADED ]; then
+		export NVM_LOADED=1
+		unalias nvm
+		unalias node
+		unalias npm
+		unalias npx
+		unalias create-react-app
+		. "$NVM_DIR/nvm.sh"
+		. "$NVM_DIR/bash_completion"
+	fi
+}
