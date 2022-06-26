@@ -42,6 +42,9 @@ ytmpv() {
 	yt-dlp -q -o - "$1" | mpv -
 }
 
+# timeking config
+alias newsboat="timeking '11:00-24:00' && newsboat"
+
 goto() {
 	open="$(grepa "$@" | fzf --ansi -1)"
 	if [ ! -z "$open" ]; then

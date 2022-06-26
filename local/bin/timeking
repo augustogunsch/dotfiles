@@ -1,0 +1,30 @@
+#!/bin/python3.9
+from datetime import datetime
+from sys import argv, stderr
+from os import system
+import re
+
+rules = argv[1].split('&')
+
+pattern = re.compile(r'(\d{2}):(\d{2})-(\d{2}):(\d{2})')
+now = datetime.now()
+
+nm = now.hour * 60 + now.minute
+
+for rule in rules:
+    m = pattern.match(rule)
+    if not m:
+        print('unrecognized time stamp "{}"'.format(rule), file=stderr)
+        exit(1)
+
+    sh, sm, eh, em = map(int, m.groups())
+
+    sm = sh * 60 + sm
+    em = eh * 60 + em
+
+    if nm >= sm and nm <= em:
+        exit(0)
+
+print('You are not supposed to access this program now', file=stderr)
+system('notify-send -u critical "You are not supposed to access this program now"')
+exit(2)
