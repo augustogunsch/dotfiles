@@ -1,0 +1,7 @@
+include "%L"
+
+<Multi_key> <l> <l>          	: "ł"   U0142 # LATIN SMALL LETTER L WITH STROKE
+<Multi_key> <L> <L>          	: "Ł"   U0142 # LATIN CAPITAL LETTER L WITH STROKE
+
+<dead_acute> <c>                 	: "ć"   U0107 # LATIN SMALL LETTER C WITH ACUTE
+<dead_acute> <C>                 	: "Ć"   U0107 # LATIN CAPITAL LETTER C WITH ACUTE

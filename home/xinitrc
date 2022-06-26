@@ -1,3 +1,6 @@
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
+
 xrandr --dpi 96
 xset s off -dpms
 customkeys
