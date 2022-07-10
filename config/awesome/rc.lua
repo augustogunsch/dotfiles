@@ -23,7 +23,7 @@ local is_deb, debian = pcall(require, "debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- awesome-wm-widgets
-local cmus_widget = require("cmus-widget.cmus")
+local cmus_widget = require("awesome-wm-widgets.cmus-widget.cmus")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
@@ -321,8 +321,13 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
     awful.key({ }, "XF86MonBrightnessDown", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
 
-    -- cmus toggle paused
-    awful.key({ modkey, "Shift"   }, "p", function () cmus_widget:play_pause() end, {description = "play/pause cmus", group = "custom"}),
+    -- cmus
+    awful.key({ modkey, "Shift" }, "p",              function () cmus_widget:play_pause() end, {description = "toggle track",   group = "cmus"}),
+    awful.key({                 }, "XF86AudioPlay",  function () cmus_widget:play()       end, {description = "play track",     group = "cmus"}),
+    awful.key({                 }, "XF86AudioPause", function () cmus_widget:pause()      end, {description = "pause track",    group = "cmus"}),
+    awful.key({                 }, "XF86AudioNext",  function () cmus_widget:next_track() end, {description = "next track",     group = "cmus"}),
+    awful.key({                 }, "XF86AudioPrev",  function () cmus_widget:prev_track() end, {description = "previous track", group = "cmus"}),
+    awful.key({                 }, "XF86AudioStop",  function () cmus_widget:stop()       end, {description = "stop track",     group = "cmus"}),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
