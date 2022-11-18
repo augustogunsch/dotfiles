@@ -23,14 +23,18 @@ hi FoldColumn ctermbg=233 ctermfg=247
 let mapleader = " "
 let maplocalleader = ","
 
-nnoremap <silent> <F12> <cmd>set et<cr><cmd>set ts=4<cr><cmd>set sw=4<cr>
-nnoremap <silent> <F11> <cmd>set noet<cr>
 nnoremap <silent> <F2> <cmd>ToggleDiagOff<cr>:Gdiffsplit<cr>
+nnoremap <silent> <F3> <cmd>%!sed 's/[ \t]*$//'<cr>
+nnoremap <silent> <F4> <cmd>%s/"/'/g<cr>
 nnoremap <silent> <F5> <cmd>ToggleDiag<cr>
 nnoremap <silent> <F6> <cmd>%!expand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
 nnoremap <silent> <F7> <cmd>%!unexpand -t4<cr><cmd>%!sed 's/[ \t]*$//'<cr>
 nnoremap <silent> <F8> <cmd>TagbarToggle<CR>
+nnoremap <silent> <F9> <cmd>%s/\([( -]\)0\.\(\d\)/\1.\2/gc<CR>
+nnoremap <silent> <F12> <cmd>set et<cr><cmd>set ts=4<cr><cmd>set sw=4<cr>
+nnoremap <silent> <F11> <cmd>set noet<cr>
 nnoremap <silent> <C-n> <cmd>NERDTreeToggle<CR>
+nnoremap <silent> <C-p> <cmd>let @+=expand("%")<cr><cmd>echo "Copied relative file path to clipboard."<cr>
 
 nnoremap <silent> <leader>ev <cmd>tabnew $MYVIMRC<cr>
 nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr>

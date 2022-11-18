@@ -1,4 +1,4 @@
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$PATH"
 export EDITOR="/usr/local/bin/nvim"
 
 # vim
@@ -13,13 +13,22 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
+alias ........="cd ../../../../../../.."
+alias .........="cd ../../../../../../../.."
+alias ..........="cd ../../../../../../../../.."
+alias ...........="cd ../../../../../../../../../.."
+alias ............="cd ../../../../../../../../../../.."
+alias .............="cd ../../../../../../../../../../../.."
+alias ..............="cd ../../../../../../../../../../../../.."
+alias ...............="cd ../../../../../../../../../../../../../.."
+alias ................="cd ../../../../../../../../../../../../../../.."
 
 # improved reset and clear
 alias reset="tput reset"
 alias clear="tput reset"
 
 # better du
-alias du="du -hd 1"
+alias du="du -ha"
 
 # better feh
 alias feh="feh -."

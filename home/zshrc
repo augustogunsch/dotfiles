@@ -30,9 +30,6 @@ export LS_COLORS='di=1;94:ex=4;92:ln=3;96'
 # aliases:
 source ~/.aliases
 
-# reload with .
-alias .="source ~/.zshrc"
-
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 	exec startx
 fi
