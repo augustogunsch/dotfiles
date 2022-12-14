@@ -80,7 +80,8 @@ local background_processes = {
     "flameshot",
     "nm-applet",
     "lxpolkit",
-    "unclutter"
+    "unclutter",
+    "radiotray-ng"
 }
 
 local reload_programs = {

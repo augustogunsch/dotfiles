@@ -1,0 +1,12 @@
+[
+	{
+		"group" : "root",
+		"stations" :
+		[
+			{
+				"name" : "Radio Maryja",
+				"url" : "https://radiomaryja.fastcast4u.com/tunein/radiomaryja.pls"
+			}
+		]
+	}
+]
