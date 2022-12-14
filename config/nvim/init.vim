@@ -20,6 +20,9 @@ hi DiffText ctermbg=166 ctermfg=15
 hi Folded ctermbg=233 ctermfg=247
 hi FoldColumn ctermbg=233 ctermfg=247
 
+" matchit builtin plugin
+packadd! matchit
+
 let mapleader = " "
 let maplocalleader = ","
 
@@ -33,11 +36,11 @@ nnoremap <silent> <F8> <cmd>TagbarToggle<CR>
 nnoremap <silent> <F9> <cmd>%s/\([( -]\)0\.\(\d\)/\1.\2/gc<CR>
 nnoremap <silent> <F12> <cmd>set et<cr><cmd>set ts=4<cr><cmd>set sw=4<cr>
 nnoremap <silent> <F11> <cmd>set noet<cr>
-nnoremap <silent> <C-n> <cmd>NERDTreeToggle<CR>
+nnoremap <silent> <C-n> <cmd>NERDTreeToggle<cr>
 nnoremap <silent> <C-p> <cmd>let @+=expand("%")<cr><cmd>echo "Copied relative file path to clipboard."<cr>
 
 nnoremap <silent> <leader>ev <cmd>tabnew $MYVIMRC<cr>
-nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr>
+nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr><cmd>AirlineRefresh<cr>
 nnoremap <C-s> :%s//gc<left><left><left>
 nnoremap <silent> <C-w>t <cmd>tabnew<cr>
 
@@ -91,6 +94,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-sleuth'
+
+Plug 'tpope/vim-obsession'
 
 call plug#end()
 
@@ -159,7 +164,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'rls', 'tsserver', 'jedi_language_server' }
+local servers = { 'clangd', 'rls', 'tsserver', 'jedi_language_server', 'phan'}
 for _, lsp in ipairs(servers) do
 	setup(lsp, default_attach)
 end
