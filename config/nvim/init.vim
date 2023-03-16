@@ -7,8 +7,6 @@ set nu rnu
 set smartindent
 set nocp
 set bo=all
-set mouse=a
-colorscheme torte
 set list
 set listchars=tab:*·,lead:·,trail:~,extends:>,precedes:<
 filetype indent off
@@ -26,7 +24,7 @@ packadd! matchit
 let mapleader = " "
 let maplocalleader = ","
 
-nnoremap <silent> <F2> <cmd>ToggleDiagOff<cr>:Gdiffsplit<cr>
+nnoremap <silent> <F2> <cmd>Gdiffsplit<cr>
 nnoremap <silent> <F3> <cmd>%!sed 's/[ \t]*$//'<cr>
 nnoremap <silent> <F4> <cmd>%s/"/'/g<cr>
 nnoremap <silent> <F5> <cmd>ToggleDiag<cr>
@@ -41,7 +39,8 @@ nnoremap <silent> <C-p> <cmd>let @+=expand("%")<cr><cmd>echo "Copied relative fi
 
 nnoremap <silent> <leader>ev <cmd>tabnew $MYVIMRC<cr>
 nnoremap <silent> <leader>sv <cmd>source $MYVIMRC<cr><cmd>AirlineRefresh<cr>
-nnoremap <C-s> :%s//gc<left><left><left>
+nnoremap <C-s> <cmd>w<cr>
+nnoremap <C-b> :%s//gc<left><left><left>
 nnoremap <silent> <C-w>t <cmd>tabnew<cr>
 
 nnoremap dL 0D
@@ -64,7 +63,7 @@ augroup nerdtree
 	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 augroup END
 
-let g:airline_theme = "powerlineish"
+let g:airline_theme = "papercolor"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#nerdtree_statusline = 1
@@ -86,7 +85,7 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'drmingdrmer/xptemplate'
 
-Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+"Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
 Plug 'preservim/tagbar'
 
@@ -96,6 +95,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-sleuth'
 
 Plug 'tpope/vim-obsession'
+
+Plug 'olimorris/onedarkpro.nvim'
 
 call plug#end()
 
@@ -169,6 +170,8 @@ for _, lsp in ipairs(servers) do
 	setup(lsp, default_attach)
 end
 EOF
+
+colorscheme onelight
 
 " auto close scratch buffer (preview window)
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif

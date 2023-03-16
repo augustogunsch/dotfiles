@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "Noto Sans 12"
 
 theme.bg_normal     = "#000000"
 theme.bg_focus      = "#333333"
@@ -127,6 +127,8 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
+
+theme.hotkeys_modifiers_fg = '#fcc100'
 
 return theme
 

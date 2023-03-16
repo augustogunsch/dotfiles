@@ -1,5 +1,5 @@
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$PATH"
-export EDITOR="/usr/local/bin/nvim"
+export EDITOR="/usr/bin/nvim"
 
 # vim
 alias vim="nvim"
@@ -44,7 +44,7 @@ alias venv="source venv/bin/activate"
 alias grepa="grep -I -n --color=always -r --exclude-dir=venv --exclude-dir=node_modules"
 
 # cat
-alias cat="batcat -p --paging=never"
+alias cat="bat -p --paging=never --theme=OneHalfLight"
 
 # pipe yd-dlp to mpv
 ytmpv() {

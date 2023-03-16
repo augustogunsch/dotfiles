@@ -3,6 +3,9 @@ set -e
 cd "$(dirname "$0")"
 PWD="$(pwd)"
 
+git submodule init
+git submodule update
+
 clone_dir() {
 	local dir=${1:-home}
 	local to=${2:-$HOME}

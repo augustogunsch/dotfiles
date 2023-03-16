@@ -1,3 +1,4 @@
 Host vps
 	User root
 	HostName augustogunsch.com
+	IdentityFile ~/.ssh/id_rsa
