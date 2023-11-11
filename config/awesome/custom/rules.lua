@@ -62,29 +62,29 @@ awful.rules.rules = {
       }, properties = { tag = "1" }
     },
 
-    { rule_any = {class = { "WorkFirefox" }
-      }, properties = { tag = "1" }
-    },
-
-    { rule_any = {class = { "WorkAlacritty" }
-      }, properties = { tag = "2" }
-    },
-
-    { rule_any = {class = { "jetbrains-phpstorm" }
-      }, properties = { tag = "3" }
-    },
-
-    { rule_any = {class = { "DBeaver" }
-      }, properties = { tag = "9" }
-    },
-
-    { rule_any = {
-        class = { "DBeaver" },
-      }, properties = { tag = "9" }
-    },
-
-    { rule_any = {class = { "Slack" }
-      }, properties = { tag = "0" }
-    },
+    -- { rule_any = {class = { "WorkFirefox" }
+    --   }, properties = { tag = "1" }
+    -- },
+    --
+    -- { rule_any = {class = { "WorkAlacritty" }
+    --   }, properties = { tag = "2" }
+    -- },
+    --
+    -- { rule_any = {class = { "jetbrains-phpstorm" }
+    --   }, properties = { tag = "3" }
+    -- },
+    --
+    -- { rule_any = {class = { "DBeaver" }
+    --   }, properties = { tag = "9" }
+    -- },
+    --
+    -- { rule_any = {
+    --     class = { "DBeaver" },
+    --   }, properties = { tag = "9" }
+    -- },
+    --
+    -- { rule_any = {class = { "Slack" }
+    --   }, properties = { tag = "0" }
+    -- },
 }
 -- }}}

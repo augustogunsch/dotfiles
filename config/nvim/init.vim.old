@@ -1,0 +1,182 @@
+call plug#begin('~/.config/nvim/plugged')
+
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Gruvbox theme
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+
+" Tree for searching files
+Plug 'scrooloose/nerdtree'
+Plug 'PhilRunninger/nerdtree-visual-selection'
+
+" Quick comment/uncomment lines
+Plug 'scrooloose/nerdcommenter'
+
+" Auto complete quotes
+Plug 'raimondi/delimitmate'
+
+" Changing quotes/tags/parenthesis
+" See :help surround
+" Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
+" Git integration
+Plug 'tpope/vim-fugitive'
+
+" File symbols browser
+Plug 'preservim/tagbar'
+
+" Fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Indentation style guesser
+Plug 'tpope/vim-sleuth'
+
+" Session manager
+Plug 'tpope/vim-obsession'
+
+" Cheat sheet
+Plug 'folke/which-key.nvim'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
+" nvim-cmp
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" Snippets
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+Plug 'rafamadriz/friendly-snippets'
+Plug 'saadparwaiz1/cmp_luasnip'
+
+" Eslint
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvimtools/none-ls.nvim'
+
+call plug#end()
+
+augroup nerdtree
+	" Exit Vim if NERDTree is the only window remaining in the only tab.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	" Close the tab if NERDTree is the only window remaining in it.
+	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+	autocmd VimEnter * NERDTree | wincmd p
+augroup END
+let g:NERDTreeShowLineNumbers = 1
+
+colorscheme gruvbox
+
+let g:airline_theme = "gruvbox_material"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#nerdtree_statusline = 1
+
+" auto close scratch buffer (preview window)
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+lua << EOF
+require('luasnip.loaders.from_vscode').lazy_load()
+
+local wk = require('which-key')
+
+wk.register({
+	['<C-t>'] = { '<cmd>TagbarToggle<cr>', 'Toggle symbols tree browser' },
+	['<leader>ff'] = { '<cmd>Files<cr>', 'Find a file' },
+	['<leader>ft'] = { '<cmd>Ag<cr>', 'Find text' },
+}, {
+	mode = 'n',
+	silent = true,
+	noremap = true,
+})
+
+wk.register({
+	['<C-l>'] = { '<esc>bEa, ', 'Add , at the end of next WORD' },
+}, {
+	mode = 'i',
+	silent = true,
+	noremap = true,
+})
+
+local on_attach = function(client, bufnr)
+	local bufopts = { noremap=true, silent=true, buffer=bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', '<leader>n', vim.lsp.buf.rename, bufopts)
+end
+
+local cmp = require'cmp'
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.abort(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
+	}),
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	}, {
+		{ name = 'buffer' },
+	})
+})
+
+cmp.setup.cmdline(':', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
+	})
+})
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Clang LSP
+require('lspconfig')['clangd'].setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+-- Rust LSP
+require('lspconfig')['rls'].setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+-- TypeScript LSP
+require('lspconfig')['tsserver'].setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+-- Python LSP
+require('lspconfig')['jedi_language_server'].setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+local null_ls = require('null-ls')
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.eslint,
+    },
+})
+EOF

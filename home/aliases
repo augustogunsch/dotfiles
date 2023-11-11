@@ -1,4 +1,7 @@
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$PATH"
+export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
+export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
+export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
 export EDITOR="/usr/bin/nvim"
 
 # vim
@@ -69,6 +72,7 @@ alias nvm="load_nvm; nvm"
 alias node="load_nvm; node"
 alias npm="load_nvm; npm"
 alias npx="load_nvm; npx"
+alias yarn="load_nvm; yarn"
 alias create-react-app="load_nvm; create-react-app"
 
 export NVM_DIR="$HOME/.nvm"
@@ -80,7 +84,7 @@ load_nvm() {
 		unalias npm
 		unalias npx
 		unalias create-react-app
-		. "$NVM_DIR/nvm.sh"
-		. "$NVM_DIR/bash_completion"
+		. /usr/share/nvm/init-nvm.sh
+		. /usr/share/nvm/bash_completion
 	fi
 }

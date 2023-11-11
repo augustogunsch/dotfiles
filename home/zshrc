@@ -23,9 +23,11 @@ bindkey "^[OB" history-beginning-search-forward-end
 bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
 
+autoload -U promptinit
+promptinit
 
-export PROMPT='%B%F{4}[%F{20}%n@%m %F{124}%~%F{4}]$%b%f '
-export LS_COLORS='di=1;94:ex=4;92:ln=3;96'
+export PROMPT="%F{9}[%F{11}%n@%F{11}%m %F{15}%~%F{9}]$%b%f "
+export RPROMPT="%T"
 
 # aliases:
 source ~/.aliases

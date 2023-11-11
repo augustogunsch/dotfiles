@@ -1,5 +1,7 @@
 -- {{{ Modules
 local awful = require("awful")
+
+local options = require("options")
 -- }}}
 
 -- {{{ Variables
@@ -27,25 +29,31 @@ local function kill_apps()
     end
 end
 
-local function restart()
-    kill_apps()
-    awesome.restart()
-end
-
 local function quit()
     kill_apps()
     awesome.quit()
 end
+
+local function start()
+    for _, cmd in ipairs(start_applications) do
+        awful.spawn.single_instance(cmd)
+    end
+end
+
+local function restart()
+    kill_apps()
+    awesome.restart()
+    awful.spawn(options.terminal .. "-e xmodmap ~/.Xmodmap")
+end
 -- }}}
 
 --- {{{ Script
-for _, cmd in ipairs(start_applications) do
-    awful.spawn.single_instance(cmd)
-end
+start()
 
 return {
     kill_apps = kill_apps,
     restart = restart,
+    start = start,
     quit = quit
 }
 -- }}}
