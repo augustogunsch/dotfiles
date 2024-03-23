@@ -20,6 +20,7 @@ local plugins = {
     lazy = false,
     priority = 1000,
     config = function ()
+      vim.g.gruvbox_material_transparent_background = 1
       vim.cmd.colorscheme("gruvbox-material")
     end,
   },
@@ -36,6 +37,8 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     cmd = "TSUpdate"
   },
+  "nvim-treesitter/nvim-treesitter-context",
+  -- harpoon
   {
     "ThePrimeagen/harpoon",
     dependencies = {
@@ -51,6 +54,14 @@ local plugins = {
   "tpope/vim-repeat",
   "tpope/vim-fugitive",
   "numToStr/Comment.nvim",
+  -- smooth scrolling
+  {
+    "karb94/neoscroll.nvim",
+    enabled = false,
+    config = function ()
+      require('neoscroll').setup {}
+    end
+  },
   -- mason LSP manager
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",

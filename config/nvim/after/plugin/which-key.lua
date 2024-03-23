@@ -34,12 +34,6 @@ wk.register({
     end,
     'Remove trailing whitespace'
   },
-  ["<leader>e"] = { vim.diagnostic.open_float, "Show diagnostics error details" },
-  ["<leader>n"] = { "Rename symbol under cursor" },
-  ["[d"] = { vim.diagnostic.goto_prev, "Go to previous diagnostics error" },
-  ["]d"] = { vim.diagnostic.goto_next, "Go to next diagnostics error" },
-  ["gD"] = { "Go to declaration" },
-  ["gd"] = { "Go to definition" },
   ["dL"] = { "0D", "Truncate line" },
   ["_"] = {
     function ()
@@ -88,9 +82,12 @@ wk.register({
   ["s]"] = { "<esc>`<i[<esc>`><right>a]<esc>", "Surround with []" },
   ["s{"] = { "<esc>`<i{<esc>`><right>a}<esc>", "Surround with {}" },
   ["s}"] = { "<esc>`<i{<esc>`><right>a}<esc>", "Surround with {}" },
+  ["s<"] = { "<esc>`<i<<esc>`><right>a><esc>", "Surround with <>" },
+  ["s>"] = { "<esc>`<i<<esc>`><right>a><esc>", "Surround with <>" },
   ["J"] = { ":m '>+1<CR>gv=gv", "Move lines down" },
   ["K"] = { ":m '<-2<CR>gv=gv", "Move lines up" },
   ["<leader>y"] = { "\"+y", "Copy to system clipboard" },
+  ["<C-j>"] = { "J", "Join lines" },
 }, {
   mode = "v",
   silent = true,

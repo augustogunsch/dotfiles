@@ -1,4 +1,5 @@
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$PATH"
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$PATH"
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
 export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
@@ -6,6 +7,9 @@ export EDITOR="/usr/bin/nvim"
 
 # vim
 alias vim="nvim"
+
+# etmux
+alias etmux="tmux new-session '$EDITOR; $SHELL' \; split-window -l 15 \; select-pane -U"
 
 # ls
 alias ls="ls --color=auto"
@@ -87,4 +91,8 @@ load_nvm() {
 		. /usr/share/nvm/init-nvm.sh
 		. /usr/share/nvm/bash_completion
 	fi
+}
+
+pip_install_save() {
+    pip install $@ && pip freeze | grep -i $@ >> requirements.txt
 }

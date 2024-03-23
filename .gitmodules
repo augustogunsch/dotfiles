@@ -1,9 +1,9 @@
-[submodule "config/awesome/awesome-wm-widgets"]
-	path = config/awesome/awesome-wm-widgets
-	url = https://github.com/streetturtle/awesome-wm-widgets
 [submodule "config/alacritty/themes"]
 	path = config/alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme
 [submodule "home/tmux/plugins/tpm"]
 	path = home/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "config/awesome/awesome-wm-widgets"]
+	path = config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets

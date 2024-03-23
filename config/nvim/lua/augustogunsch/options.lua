@@ -9,7 +9,7 @@ vim.g.mapleader = " "
 
 vim.opt.termguicolors = true
 
-vim.opt.expandtab = true
+vim.opt.expandtab = false
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
@@ -27,3 +27,5 @@ vim.opt.relativenumber = true
 
 -- To avoid bad habits
 vim.opt.mouse = ""
+
+vim.opt.colorcolumn = "80"
