@@ -81,6 +81,8 @@ local plugins = {
     config = false,
   },
   "neovim/nvim-lspconfig",
+  -- linting
+  "mfussenegger/nvim-lint",
   -- autocompletion
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-buffer",

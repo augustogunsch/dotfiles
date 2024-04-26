@@ -9,7 +9,7 @@ local profile = "desktop"
 local terminal = "alacritty"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
-local screen_locker = "cinnamon-screensaver-command -l"
+local screen_locker = "light-locker-command -l"
 
 -- Default modkey
 local modkey = "Mod1"

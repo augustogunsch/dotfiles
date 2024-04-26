@@ -3,7 +3,7 @@ export PATH="$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/compose
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
 export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
-export EDITOR="/usr/bin/nvim"
+export EDITOR="/usr/local/bin/nvim"
 
 # vim
 alias vim="nvim"
@@ -51,7 +51,7 @@ alias venv="source venv/bin/activate"
 alias grepa="grep -I -n --color=always -r --exclude-dir=venv --exclude-dir=node_modules"
 
 # cat
-alias cat="bat -p --paging=never --theme=OneHalfLight"
+alias cat="batcat -p --paging=never --theme=OneHalfLight"
 
 # pipe yd-dlp to mpv
 ytmpv() {
@@ -71,27 +71,8 @@ goto() {
 	fi
 }
 
-# NVM - Dynamic loading trick
-alias nvm="load_nvm; nvm"
-alias node="load_nvm; node"
-alias npm="load_nvm; npm"
-alias npx="load_nvm; npx"
-alias yarn="load_nvm; yarn"
-alias create-react-app="load_nvm; create-react-app"
-
 export NVM_DIR="$HOME/.nvm"
-load_nvm() {
-	if [ -z $NVM_LOADED ]; then
-		export NVM_LOADED=1
-		unalias nvm
-		unalias node
-		unalias npm
-		unalias npx
-		unalias create-react-app
-		. /usr/share/nvm/init-nvm.sh
-		. /usr/share/nvm/bash_completion
-	fi
-}
+alias nvm='unalias nvm && source "$NVM_DIR/nvm.sh" && nvm'
 
 pip_install_save() {
     pip install $@ && pip freeze | grep -i $@ >> requirements.txt

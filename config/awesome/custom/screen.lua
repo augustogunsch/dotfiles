@@ -11,8 +11,6 @@ local bindings = require("custom.bindings")
 -- }}}
 
 -- {{{ Functions
-mywibox = awful.wibar({ position = "top", screen = s })
-
 local function set_wallpaper(s)
     awful.spawn.with_shell("nitrogen --restore")
 end
@@ -45,7 +43,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Wibox
-    s.mywibox = mywibox
+    s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup {

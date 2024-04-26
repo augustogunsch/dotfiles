@@ -4,12 +4,13 @@ local wk = require("which-key")
 wk.register({
     ["gd"] = { "Go to definitions" },
     ["K"] = { "Show info" },
-    ["<leader>vws"] = { "View workspace symbol"},
+    ["<leader>vs"] = { "View workspace symbol"},
     ["<leader>vd"] = { "View diagnostics"},
-    ["<leader>vca"] = { "View code action"},
-    ["<leader>vrr"] = { "View references"},
-    ["<leader>vrn"] = { "Rename symbol"},
+    ["<leader>va"] = { "View code action"},
+    ["<leader>vr"] = { "View references"},
+    ["<leader>vn"] = { "Rename symbol"},
     ["<leader>vl"] = { "Restart LSP"},
+    ["<leader>vf"] = { "LSP Format"},
     ["[d"] = { "Go to previous diagnotics"},
     ["]d"] = { "Go to next diagnotics"}
 }, {
@@ -31,14 +32,15 @@ lsp_zero.on_attach(function(client, bufnr)
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+  vim.keymap.set("n", "<leader>vs", vim.lsp.buf.workspace_symbol, opts)
   vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "<leader>va", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>vr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "<leader>vn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<leader>vl", vim.cmd.LspRestart, opts)
+  vim.keymap.set("n", "<leader>vf", vim.lsp.buf.format, opts)
   vim.keymap.set("n", "<C-s>", function()
     vim.lsp.buf.format()
     vim.cmd.w()
@@ -79,7 +81,7 @@ cmp.setup({
     ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
     ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
     ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-Space>"] = cmp.mapping.confirm({ select = true }),
   }),
   snippet = {
     expand = function(args)

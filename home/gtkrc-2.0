@@ -1,4 +1,4 @@
-gtk-icon-theme-name = "Material-Black-Lime-Numix"
-gtk-theme-name = "Mint-X"
+gtk-icon-theme-name = "Mint-Y-Dark-Blue"
+gtk-theme-name = "Mint-Y-Dark-Blue"
 gtk-cursor-theme-name = "Human"
-gtk-application-prefer-dark-theme = "false"
+gtk-application-prefer-dark-theme = "true"

@@ -27,25 +27,32 @@ return function(s)
     return {
         layout = wibox.layout.fixed.horizontal,
         {
-            widget = wibox.container.margin,
-            right = 7,
+            widget = awful.widget.only_on_screen,
             {
-                layout = wibox.layout.fixed.horizontal,
-                spacing = 14,
-                wibox.widget.separator{
-                    orientation = "vertical",
-                    forced_width = 5,
-                    visible = false
-                },
-                wibox.widget.systray(),
-                wibox.widget.separator{
-                    orientation = "vertical",
-                    forced_width = 5
+                widget = wibox.container.margin,
+                right = 7,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    spacing = 14,
+                    wibox.widget.separator{
+                        orientation = "vertical",
+                        forced_width = 5,
+                        visible = false
+                    },
+                    wibox.widget.systray(),
+                    wibox.widget.separator{
+                        orientation = "vertical",
+                        forced_width = 5
+                    }
                 }
             }
         },
         {
-            cmus_widget(),
+            {
+                layout = wibox.layout.flex.horizontal,
+                max_widget_size = 300,
+                cmus_widget(),
+            },
             widget = wibox.container.margin,
             right = 10,
             left = 7,
@@ -58,18 +65,27 @@ return function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 14,
-                volume_widget{
-                    widget_type = 'icon_and_text',
-                    with_icon = true,
-                    mute_color = beautiful.bg_urgent
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    volume_widget{
+                        widget_type = 'icon_and_text',
+                        with_icon = true,
+                        mute_color = beautiful.bg_urgent,
+                    },
+                    wibox.widget{
+                        widget = wibox.widget.textbox,
+                        text = '%',
+                    },
                 },
                 battery_widget{
-                    enable_battery_warning = true
+                    enable_battery_warning = true,
+                    show_current_level = true,
+                    font = beautiful.font
                 },
                 brightness_widget {
                     type = 'icon_and_text',
-                    program = 'brightnessctl',
-                    percentage = false
+                    program = 'light',
+                    percentage = true
                 },
                 mytextclock,
                 s.mylayoutbox,

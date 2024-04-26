@@ -25,20 +25,23 @@ return function(s)
     return {
         layout = wibox.layout.fixed.horizontal,
         {
-            widget = wibox.container.margin,
-            right = 7,
+            widget = awful.widget.only_on_screen,
             {
-                layout = wibox.layout.fixed.horizontal,
-                spacing = 14,
-                wibox.widget.separator{
-                    orientation = "vertical",
-                    forced_width = 5,
-                    visible = false
-                },
-                wibox.widget.systray(),
-                wibox.widget.separator{
-                    orientation = "vertical",
-                    forced_width = 5
+                widget = wibox.container.margin,
+                right = 7,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    spacing = 14,
+                    wibox.widget.separator{
+                        orientation = "vertical",
+                        forced_width = 5,
+                        visible = false
+                    },
+                    wibox.widget.systray(),
+                    wibox.widget.separator{
+                        orientation = "vertical",
+                        forced_width = 5
+                    }
                 }
             }
         },

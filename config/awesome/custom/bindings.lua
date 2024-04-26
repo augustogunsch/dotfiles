@@ -27,7 +27,7 @@ root.buttons(gears.table.join(
 
 -- Key bindings
 globalkeys = gears.table.join(
-    awful.key({ }, "Print", function () awful.util.spawn("flameshot gui", false) end),
+    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn("flameshot gui", false) end),
 
     -- Volume widget
     awful.key({ }, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end, {description = "increase volume", group = "custom"}),
@@ -40,14 +40,14 @@ globalkeys = gears.table.join(
 
     -- Cmus widget
     awful.key({ modkey, "Shift" }, "p",              function () cmus_widget:play_pause() end, {description = "toggle track",   group = "cmus"}),
-    awful.key({                 }, "XF86AudioPlay",  function () cmus_widget:play()       end, {description = "play track",     group = "cmus"}),
-    awful.key({                 }, "XF86AudioPause", function () cmus_widget:pause()      end, {description = "pause track",    group = "cmus"}),
-    awful.key({                 }, "XF86AudioNext",  function () cmus_widget:next_track() end, {description = "next track",     group = "cmus"}),
-    awful.key({                 }, "XF86AudioPrev",  function () cmus_widget:prev_track() end, {description = "previous track", group = "cmus"}),
-    awful.key({                 }, "XF86AudioStop",  function () cmus_widget:stop()       end, {description = "stop track",     group = "cmus"}),
+    awful.key({ }, "XF86AudioPlay",  function () cmus_widget:play()       end, {description = "play track",     group = "cmus"}),
+    awful.key({ }, "XF86AudioPause", function () cmus_widget:pause()      end, {description = "pause track",    group = "cmus"}),
+    awful.key({ }, "XF86AudioNext",  function () cmus_widget:next_track() end, {description = "next track",     group = "cmus"}),
+    awful.key({ }, "XF86AudioPrev",  function () cmus_widget:prev_track() end, {description = "previous track", group = "cmus"}),
+    awful.key({ }, "XF86AudioStop",  function () cmus_widget:stop()       end, {description = "stop track",     group = "cmus"}),
 
     -- Lock Screen
-    awful.key({ }, "XF86HomePage", function() awful.spawn(options.screen_locker) end,
+    awful.key({ }, "F9", function() awful.spawn(options.screen_locker) end,
               {description = "lock the screen", group = "awesome"}),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
