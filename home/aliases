@@ -1,5 +1,5 @@
 export GOPATH="$HOME/.go"
-export PATH="$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$PATH"
+export PATH="$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:/usr/local/go/bin:$PATH"
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
 export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
