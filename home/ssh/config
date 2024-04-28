@@ -1,8 +1,8 @@
 Host vps
 	User root
 	HostName augustogunsch.com
-	IdentityFile ~/.ssh/id_rsa_secure
+	IdentityFile ~/.ssh/id_rsa
 
 host github
 	HostName github.com
-	IdentityFile ~/.ssh/id_rsa_secure
+	IdentityFile ~/.ssh/id_rsa

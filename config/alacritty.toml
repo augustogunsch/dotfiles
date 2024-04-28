@@ -1,6 +1,6 @@
 # For full documentation of this config format, look man 5 alacritty
 
-import = ["~/.config/alacritty/themes/gruvbox_material_medium_dark.yaml"]
+#import = ["~/.config/alacritty/themes/gruvbox_material_medium_dark.yaml"]
 
 [window]
 opacity = 0.9
