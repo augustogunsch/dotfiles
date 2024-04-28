@@ -7,7 +7,7 @@ keycode 108 = Mode_switch
 
 ! Turn Windows key into multi key
 keycode 133 = Multi_key Multi_key Multi_key
-!
+
 ! Turn Tilde, Grave and Circumflex into dead versions
 keycode  15 = 6 dead_circumflex 6 dead_circumflex
 keycode  49 = dead_grave dead_tilde dead_grave dead_tilde

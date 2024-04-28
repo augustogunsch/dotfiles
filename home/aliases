@@ -3,7 +3,7 @@ export PATH="$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/compose
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
 export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
-export EDITOR="/usr/local/bin/nvim"
+export EDITOR="/usr/bin/nvim"
 
 # vim
 alias vim="nvim"
