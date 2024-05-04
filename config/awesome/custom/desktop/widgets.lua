@@ -28,7 +28,6 @@ return function(s)
             widget = awful.widget.only_on_screen,
             {
                 widget = wibox.container.margin,
-                right = 7,
                 {
                     layout = wibox.layout.fixed.horizontal,
                     spacing = 14,
@@ -46,7 +45,11 @@ return function(s)
             }
         },
         {
-            cmus_widget(),
+            {
+                layout = wibox.layout.flex.horizontal,
+                max_widget_size = 300,
+                cmus_widget(),
+            },
             widget = wibox.container.margin,
             right = 10,
             left = 7,
@@ -55,7 +58,6 @@ return function(s)
         },
         {
             widget = wibox.container.margin,
-            left = 7,
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 14,
