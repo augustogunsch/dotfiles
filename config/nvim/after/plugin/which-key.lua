@@ -1,6 +1,7 @@
 local wk = require("which-key")
 
 wk.register({
+  ["<C-n>"] = { vim.cmd.Explore, "Toggle file explorer" },
   ["<leader>sv"] = {
     "Reload Neovim configuration"
   },

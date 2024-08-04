@@ -47,7 +47,7 @@ local plugins = {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    enabled = true
+    enabled = false
   },
   "raimondi/delimitmate",
   "tpope/vim-surround",
@@ -83,6 +83,7 @@ local plugins = {
   "neovim/nvim-lspconfig",
   -- linting
   "mfussenegger/nvim-lint",
+  "psf/black",
   -- autocompletion
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-buffer",

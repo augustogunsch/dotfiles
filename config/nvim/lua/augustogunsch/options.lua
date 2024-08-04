@@ -1,9 +1,10 @@
 -- Disable newtrw
 -- required by nvim-tree
-vim.opt.guicursor = ""
+vim.opt.guicursor = "a:blinkon0"
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Disable netrw explorer
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
 
@@ -28,4 +29,4 @@ vim.opt.relativenumber = true
 -- To avoid bad habits
 vim.opt.mouse = ""
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "120"

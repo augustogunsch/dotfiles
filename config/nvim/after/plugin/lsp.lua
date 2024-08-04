@@ -53,9 +53,9 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "tsserver",
     "rust_analyzer",
-    "jedi_language_server",
     "clangd",
-    "gopls"
+    "gopls",
+    "pyright"
   },
   handlers = {
     lsp_zero.default_setup,
