@@ -30,7 +30,6 @@ return function(s)
             widget = awful.widget.only_on_screen,
             {
                 widget = wibox.container.margin,
-                right = 7,
                 {
                     layout = wibox.layout.fixed.horizontal,
                     spacing = 14,
@@ -61,7 +60,6 @@ return function(s)
         },
         {
             widget = wibox.container.margin,
-            left = 7,
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 14,
