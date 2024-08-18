@@ -16,7 +16,7 @@ flake8.args = {
 
 wk.register({
     ["<leader>b"] = { vim.cmd.Black, "Black format" },
-    ["<leader>l"] = { function() require("lint").try_lint() end, "Try to lint" },
+    ["<leader>l"] = { function() require("lint").try_lint() end, "Try to lint format" },
 }, {
     mode = "n",
     silent = true,

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo 'Please pick from the following keyboard profiles:'
+
+PROFILES=("Portuguese" "English" "QUIT")
+select profile in "${PROFILES[@]}"
+do
+	case $profile in
+		"Portuguese")
+			setxkbmap br
+			xmodmap ~/.Xmodmap_br
+			break
+			;;
+		"English")
+			setxkbmap us
+			xmodmap ~/.Xmodmap
+			break
+			;;
+		"QUIT")
+			break
+			;;
+		*) echo "invalid option $REPLY" ;;
+	esac
+done

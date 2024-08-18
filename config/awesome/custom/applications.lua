@@ -7,6 +7,9 @@ local options = require("options")
 -- {{{ Variables
 -- Applications that will be started
 local start_applications = {
+    -- Screen locker daemon
+    "light-locker --lock-after-screensaver=300 --lock-on-lid --lock-on-suspend",
+
     "picom",
     "flameshot",
     "nm-applet",

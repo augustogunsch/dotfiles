@@ -1,0 +1,23 @@
+! Make Caps Lock act as Escape, unless Shift is pressed
+clear lock
+keycode  66 = Escape Caps_Lock Escape
+
+! Turn AltGr into Mode_switch
+keycode 108 = Mode_switch
+
+! Turn Windows key into multi key
+keycode 133 = Multi_key Multi_key Multi_key
+
+! Turn Right Control into Dead Acute
+clear control
+add control = Control_L
+keycode 105 = dead_acute dead_acute dead_acute
+
+! Make different letters when Mode_switch is being pressed
+! Portuguese:
+keycode  54 = c C ccedilla Ccedilla
+! Polish:
+keycode  26 = e E U0119 U0118
+keycode  38 = a A U0105 U0104
+keycode  46 = l L U0142 U0141
+keycode  52 = z Z U017C U017B
