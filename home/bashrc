@@ -14,3 +14,5 @@ source ~/.aliases
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 	exec startx
 fi
+
+eval "$(fnm env --use-on-cd --shell bash)"

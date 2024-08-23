@@ -71,9 +71,6 @@ goto() {
 	fi
 }
 
-export NVM_DIR="$HOME/.nvm"
-alias nvm='unalias nvm && source "$NVM_DIR/nvm.sh" && nvm'
-
 pip_install_save() {
     pip install $@ && pip freeze | grep -i $@ >> requirements.txt
 }
